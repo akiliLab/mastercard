@@ -20,10 +20,10 @@ type server struct{}
 func (s *server) GetMerchantIdentifiers(ctx context.Context, request *mastercard.MastercardRequest) (*mastercard.MastercardReply, error) {
 	// MerchantId = "STILLWATERSGENERALSTBRANSONMO"
 	// Search = FuzzyMatch
-	_, err := client.GetMerchantIdentifiers(request.MerchantID, FuzzyMatch)
+	response, err := client.GetMerchantIdentifiers(request.MerchantID, FuzzyMatch)
 
-	// rep := &mastercard.MastercardReply{}
-	return nil, err
+	rep := &mastercard.MastercardReply{MerchantIDs: response}
+	return rep, err
 }
 
 func main() {
