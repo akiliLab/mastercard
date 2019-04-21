@@ -62,5 +62,5 @@ func (c *Client) GetMerchantIdentifiers(merchantID string, search SearchMethod) 
 	}
 	bodyString := string(serializedBody)
 	fmt.Println("Body: ", bodyString)
-	return nil, nil
+	return merchantIds, nil
 }
