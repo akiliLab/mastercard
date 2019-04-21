@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package mastercard;
+
+
+
+service MastercardService {
+    rpc GetMerchantIdentifiers (MastercardRequest) returns (MastercardReply) {}
+}
+  
+message MastercardRequest {
+    string MerchantID = 1;
+    // this can be fuzzy or exact search
+    int64 Search = 2; 
+}
+  
+message MastercardReply {
+    MerchantIDs merchantIDs = 1;
+}
+
+message MerchantIDs {
+    string Message = 1;
+    repeated Merchant Merchant = 2;
+}
+
+message Merchant {
+    Address   Address  = 1;             
+    string PhoneNumber  = 2;       
+    string BrandName    = 3;        
+    string MerchantCategory = 4;     
+    string MerchantDbaName  = 5;     
+    string DescriptorText   = 6;    
+    string LegalCorporateName  = 7;  
+    string Comment      = 8;        
+    int64 LocationID       = 9;
+    string SoleProprietorName = 10;
+    int64 MatchConfidenceScore = 11; 
+}
+
+message CountrySubdivision {
+    string Name  = 1;
+    string Code = 2;
+}
+
+// Country contains country informations
+message  Country  {
+    string Name  = 1;
+    string Code  = 2;
+}
+
+// Address contains the full address of a merchant
+message Address {
+    string Line1  = 1;            
+    string Line2  = 2;           
+    string City   = 3;            
+    string PostalCode = 4;        
+    CountrySubdivision CountrySubdivision = 5;
+    Country Country  = 6;
+}

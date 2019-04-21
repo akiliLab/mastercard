@@ -1,4 +1,4 @@
-module github.com/MAKOSCAFEE/malengo-pay/mastercard
+module github.com/ubunifupay/mastercard
 
 go 1.12
 
