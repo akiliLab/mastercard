@@ -1,4 +1,4 @@
-package main
+package mastercard
 
 import (
 	"crypto/rsa"
@@ -61,17 +61,12 @@ func (e EnvType) BaseURL() string {
 // internally, but you need to pass your mastercard consumerKey, the path
 // to the .p12 file and the keystore password for the client to retrieve
 // your RSA private key and sign requests correctly
-func NewClient(consumerKey string, keystorePath string, keystorePassword string, env EnvType) (*Client, error) {
+func NewClient(consumerKey string, privateKey *rsa.PrivateKey, keystorePassword string, env EnvType) (*Client, error) {
 	client := &Client{
 		httpClient:  http.DefaultClient,
 		BaseURL:     env.BaseURL(),
 		UserAgent:   userAgent,
 		oauthClient: &oauth.Client{},
-	}
-
-	privateKey, err := extractRSAPrivateKey(keystorePath, keystorePassword)
-	if err != nil {
-		return nil, err
 	}
 
 	client.oauthClient.PrivateKey = privateKey
@@ -82,7 +77,8 @@ func NewClient(consumerKey string, keystorePath string, keystorePassword string,
 	return client, nil
 }
 
-func extractRSAPrivateKey(keystorePath string, keystorePassword string) (*rsa.PrivateKey, error) {
+// ExtractRSAPrivateKey from file
+func ExtractRSAPrivateKey(keystorePath string, keystorePassword string) (*rsa.PrivateKey, error) {
 	p12data, err := ioutil.ReadFile(keystorePath)
 	if err != nil {
 		log.Println("Error in mastercard client initialization: ", err.Error())

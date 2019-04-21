@@ -1,4 +1,4 @@
-package main
+package mastercard
 
 import (
 	"encoding/xml"
@@ -8,7 +8,7 @@ import (
 	"log"
 	"net/url"
 
-	mastercard "github.com/ubunifupay/mastercard/pb"
+	mastercardpb "github.com/ubunifupay/mastercard/pb"
 )
 
 // SearchMethod is the type of search to be performed
@@ -32,7 +32,7 @@ const (
 // Default searchMethod equals to ExactMatch which returns either 1 or 0 merchant while
 // FuzzyMatch returns from 0 to 20 merchants with a Matching confidence field that scores
 // from 0 to 100
-func (c *Client) GetMerchantIdentifiers(merchantID string, search SearchMethod) (*mastercard.MerchantIDs, error) {
+func (c *Client) GetMerchantIdentifiers(merchantID string, search SearchMethod) (*mastercardpb.MerchantIDs, error) {
 	urlFull := &url.URL{
 		Scheme: "https",
 		Host:   c.BaseURL,
@@ -54,7 +54,7 @@ func (c *Client) GetMerchantIdentifiers(merchantID string, search SearchMethod) 
 	}
 	defer resp.Body.Close()
 
-	merchantIds := &mastercard.MerchantIDs{}
+	merchantIds := &mastercardpb.MerchantIDs{}
 	serializedBody, _ := ioutil.ReadAll(resp.Body)
 	err = xml.Unmarshal(serializedBody, merchantIds)
 	if err != nil {
