@@ -1,4 +1,4 @@
-package mastercard
+package main
 
 import (
 	"crypto/rsa"

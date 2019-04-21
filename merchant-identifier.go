@@ -1,4 +1,4 @@
-package mastercard
+package main
 
 import (
 	"encoding/xml"
@@ -7,54 +7,12 @@ import (
 	"io/ioutil"
 	"log"
 	"net/url"
+
+	mastercard "github.com/ubunifupay/mastercard/pb"
 )
 
-// CountrySubdivision contains few informations about the merchant's country
-type CountrySubdivision struct {
-	Name string
-	Code string
-}
-
-// Country contains country informations
-type Country struct {
-	Name string
-	Code string
-}
-
-// Address contains the full address of a merchant
-type Address struct {
-	Line1              string
-	Line2              string
-	City               string
-	PostalCode         string
-	CountrySubdivision CountrySubdivision
-	Country            Country
-}
-
-// Merchant is a structure containing extra informations about a merchant
-type Merchant struct {
-	Address              Address
-	PhoneNumber          string
-	BrandName            string
-	MerchantCategory     string
-	MerchantDbaName      string
-	DescriptorText       string
-	LegalCorporateName   string
-	Comment              string
-	LocationID           int
-	SoleProprietorName   string
-	MatchConfidenceScore int
-}
-
-// MerchantIDs is the a structure containing from 0 to multiple MerchantId structures
-// depending on how many results are returned by Mastercard API
-type MerchantIDs struct {
-	Message           string
-	ReturnedMerchants []Merchant
-}
-
 // SearchMethod is the type of search to be performed
-type SearchMethod int
+type SearchMethod int64
 
 // String returns a string that corresponds to the search method
 func (sm *SearchMethod) String() string {
@@ -74,7 +32,7 @@ const (
 // Default searchMethod equals to ExactMatch which returns either 1 or 0 merchant while
 // FuzzyMatch returns from 0 to 20 merchants with a Matching confidence field that scores
 // from 0 to 100
-func (c *Client) GetMerchantIdentifiers(merchantID string, search SearchMethod) (*MerchantIDs, error) {
+func (c *Client) GetMerchantIdentifiers(merchantID string, search SearchMethod) (*mastercard.MerchantIDs, error) {
 	urlFull := &url.URL{
 		Scheme: "https",
 		Host:   c.BaseURL,
@@ -96,7 +54,7 @@ func (c *Client) GetMerchantIdentifiers(merchantID string, search SearchMethod) 
 	}
 	defer resp.Body.Close()
 
-	merchantIds := &MerchantIDs{}
+	merchantIds := &mastercard.MerchantIDs{}
 	serializedBody, _ := ioutil.ReadAll(resp.Body)
 	err = xml.Unmarshal(serializedBody, merchantIds)
 	if err != nil {
