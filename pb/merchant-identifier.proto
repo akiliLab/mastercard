@@ -3,17 +3,16 @@ syntax = "proto3";
 package mastercard;
 
 
-
 service MastercardService {
     rpc GetMerchantIdentifiers (MastercardRequest) returns (MastercardReply) {}
 }
-  
+
+
 message MastercardRequest {
     string MerchantID = 1;
     // this can be fuzzy or exact search
     int64 Search = 2; 
 }
-  
 message MastercardReply {
     MerchantIDs merchantIDs = 1;
 }
