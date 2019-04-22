@@ -23,6 +23,11 @@ message MastercardCurrencyConversionRequest {
 }
 
 message MastercardCurrencyConversionReply {
+    CurrencyResponse  response = 1;
+
+}
+
+message CurrencyResponse {
     // The name of the service being requested.
     string name =1;
     // The type of response being returned by the API.
@@ -35,7 +40,6 @@ message MastercardCurrencyConversionReply {
     float transAmt = 5;
     // Data 
     CurrencyDataResponse data = 6;
-
 }
 
 message CurrencyDataResponse  {
