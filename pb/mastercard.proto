@@ -1,0 +1,108 @@
+syntax = "proto3";
+
+package mastercard;
+
+import "google/protobuf/timestamp.proto";
+
+service MastercardService {
+  rpc GetMerchantIdentifiers(MastercardRequest) returns (MastercardReply) {}
+}
+
+message MastercardRequest {
+  string MerchantID = 1;
+  // this can be fuzzy or exact search
+  int64 Search = 2;
+}
+message MastercardReply { MerchantIDs merchantIDs = 1; }
+
+message MerchantIDs {
+  string Message = 1;
+  repeated Merchant Merchant = 2;
+}
+
+message Merchant {
+  Address Address = 1;
+  string PhoneNumber = 2;
+  string BrandName = 3;
+  string MerchantCategory = 4;
+  string MerchantDbaName = 5;
+  string DescriptorText = 6;
+  string LegalCorporateName = 7;
+  string Comment = 8;
+  int64 LocationID = 9;
+  string SoleProprietorName = 10;
+  int64 MatchConfidenceScore = 11;
+}
+
+message CountrySubdivision {
+  string Name = 1;
+  string Code = 2;
+}
+
+// Country contains country informations
+message Country {
+  string Name = 1;
+  string Code = 2;
+}
+
+// Address contains the full address of a merchant
+message Address {
+  string Line1 = 1;
+  string Line2 = 2;
+  string City = 3;
+  string PostalCode = 4;
+  CountrySubdivision CountrySubdivision = 5;
+  Country Country = 6;
+}
+
+message MastercardCurrencyConversionRequest {
+  // Date of the requested FX rates.
+  string fxDate = 1;
+  // Currency of the transaction.
+  string transCurr = 2;
+  // Cardholder billing currency.
+  string crdhldBillCurr = 3;
+  // Additional fees imposed by the bank.
+  int64 bankFee = 4;
+  // Amount in the transaction currency
+  float transAmt = 5;
+}
+
+message MastercardCurrencyConversionReply { CurrencyResponse response = 1; }
+
+message CurrencyResponse {
+  // The name of the service being requested.
+  string name = 1;
+  // The type of response being returned by the API.
+  string type = 2;
+  // The description of the API being called.
+  string description = 3;
+  // Additional fees imposed by the bank.
+  google.protobuf.Timestamp date = 4;
+  // Amount in the transaction currency
+  float transAmt = 5;
+  // Data
+  CurrencyDataResponse data = 6;
+}
+
+message CurrencyDataResponse {
+  // Rate applied to the transaction to convert from Transaction Currency to
+  // Cardholder Billing Currency.
+  float conversionRate = 1;
+  // Amount in the cardholder billing currency.
+  float crdhldBillAmt = 2;
+  // Amount in the transaction currency.
+  float transAmt = 3;
+  // Date of the requested FX rates.
+  string fxDate = 4;
+  // Currency of the transaction
+  string transCurr = 5;
+  // Cardholder billing currency.
+  string crdhldBillCurr = 6;
+  // Bankfee
+  float bankFee = 7;
+  // Error code
+  int64 errorCode = 8;
+  // The reason for the error.
+  string errorMessage = 9;
+}
