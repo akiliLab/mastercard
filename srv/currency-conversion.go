@@ -9,7 +9,7 @@ import (
 	"net/url"
 	"strconv"
 
-	mastercardpb "github.com/ubunifupay/mastercard/pb"
+	mastercardpb "github.com/akiliLab/mastercard/pb"
 )
 
 // GetCurrencyConversion returns all the merchants that matches the merchantId pattern

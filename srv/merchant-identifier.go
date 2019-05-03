@@ -8,7 +8,7 @@ import (
 	"log"
 	"net/url"
 
-	mastercardpb "github.com/ubunifupay/mastercard/pb"
+	mastercardpb "github.com/akiliLab/mastercard/pb"
 )
 
 // SearchMethod is the type of search to be performed

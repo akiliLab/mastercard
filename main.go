@@ -6,9 +6,9 @@ import (
 	"net"
 	"os"
 
+	mastercardpb "github.com/akiliLab/mastercard/pb"
+	mastercard "github.com/akiliLab/mastercard/srv"
 	"github.com/joho/godotenv"
-	mastercardpb "github.com/ubunifupay/mastercard/pb"
-	"github.com/ubunifupay/mastercard/pkg/mastercard"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )
