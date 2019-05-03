@@ -6,6 +6,7 @@ import "google/protobuf/timestamp.proto";
 
 service MastercardService {
   rpc GetMerchantIdentifiers(MastercardRequest) returns (MastercardReply) {}
+  rpc GetCurrencyConversion (MastercardCurrencyConversionRequest) returns (MastercardCurrencyConversionReply) {}
 }
 
 message MastercardRequest {

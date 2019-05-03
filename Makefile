@@ -12,4 +12,4 @@ test: install
 	go test ./...
 
 proto-gen:
-	 protoc --go_out=plugins=grpc:. ./pb/*.proto
+	 protoc --go_out=plugins=grpc:. ./proto/*.proto
