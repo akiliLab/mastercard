@@ -6,7 +6,7 @@ import (
 	"net"
 	"os"
 
-	mastercardpb "github.com/akiliLab/mastercard/pb"
+	mastercardpb "github.com/akiliLab/mastercard/proto"
 	mastercard "github.com/akiliLab/mastercard/srv"
 	"github.com/joho/godotenv"
 	"google.golang.org/grpc"
