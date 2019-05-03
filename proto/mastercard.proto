@@ -5,9 +5,12 @@ package mastercard;
 import "google/protobuf/timestamp.proto";
 
 service MastercardService {
-  rpc GetMerchantIdentifiers(MastercardRequest) returns (MastercardReply) {}
+  rpc GetMerchantIdentifiers(MastercardRequest) returns (MastercardReply);
   rpc GetCurrencyConversion(MastercardCurrencyConversionRequest)
-      returns (MastercardCurrencyConversionReply) {}
+      returns (MastercardCurrencyConversionReply);
+  rpc MerchantTransferFundingAndPayment(
+      MerchantTransferFundingAndPaymentRequest)
+      returns (MerchantTransferFundingAndPaymentResponse);
 }
 
 message MastercardRequest {
@@ -142,7 +145,12 @@ message MerchantTransfer {
   string processorId = 13;
   string additionalMessage = 14;
   string participationId = 15;
-  Participant participant = 16;
+  string convenienceAmount = 16;
+  string convenienceIndicator = 17;
+  string interchangeRateDesignator = 18;
+  string qrData = 19;
+  string uniqueReferenceNumber = 20;
+  Participant participant = 21;
 }
 
 message Recipient {
@@ -162,6 +170,11 @@ message TransferAmount {
   string currency = 2;
 }
 
+message TransactionAmount {
+  string value = 1;
+  string currency = 2;
+}
+
 message Participant {
   string cardAcceptorId = 1;
   string cardAcceptorName = 2;
@@ -177,4 +190,73 @@ message ReconciliationData { repeated CustomField customField = 1; }
 message MerchantTransferFundingAndPaymentRequest {
   string partnerId = 1;
   MerchantTransfer merchantTransfer = 2;
+}
+
+message MerchantTransferFundingAndPaymentResponse {
+  MerchantTransferResponse merchantTransfer = 1;
+}
+
+message MerchantTransferResponse {
+  string id = 1;
+  string resourceType = 2;
+  string transferReference = 3;
+  string paymentTypeb = 26;
+  string senderAccountUri = 4;
+  string digitalAccountReferenceNumber = 5;
+  Sender sender = 6;
+  string recipientAccountUri = 7;
+  Recipient recipient = 8;
+  TransferAmount transferAmount = 9;
+  string created = 10;
+  TransactionHistory transactionHistory = 11;
+  ReconciliationData reconciliationData = 25;
+  string payment_origination_country = 12;
+  string original_status = 13;
+  string status = 14;
+  string statusTimestamp = 15;
+  string transactionLocalDateTime = 16;
+  string mastercardAssignedId = 17;
+  string fundingSource = 18;
+  string routingTransitNumber = 19;
+  string processorId = 20;
+  Participant participant = 21;
+  string additionalMessage = 22;
+  string participationId = 23;
+  string interchangeRateDesignator = 24;
+}
+
+message TransactionHistory {
+  string resourceType = 1;
+  string itemCount = 2;
+  repeated Transaction data = 3;
+}
+
+message Transaction {
+  string id = 1;
+  string resourceType = 2;
+  string accountUri = 3;
+  TransactionAmount transactionAmount = 4;
+  string network = 5;
+  string networkStatusCode = 6;
+  string networkStatusDescription = 7;
+  string fundsAvailability = 8;
+  string type = 9;
+  string createTimestamp = 10;
+  string status = 11;
+  string statusReason = 12;
+  string statusTimestamp = 13;
+  string retrievalReference = 14;
+  string systemTraceAuditNumber = 15;
+  string switchSerialNumber = 16;
+  string uniqueReferenceNumber = 17;
+  string authorizationId = 18;
+  string qrData = 19;
+  string convenienceIndicator = 20;
+  string paymentAccountReference = 21;
+}
+
+message ErrorResponse {
+  string source = 1;
+  string reasonCode = 2;
+  string message = 3;
 }

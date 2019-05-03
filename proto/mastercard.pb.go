@@ -373,15 +373,15 @@ func (m *Country) GetCode() string {
 
 // Address contains the full address of a merchant
 type Address struct {
-	Line1                string              `protobuf:"bytes,1,opt,name=Line1,proto3" json:"Line1,omitempty"`
-	Line2                string              `protobuf:"bytes,2,opt,name=Line2,proto3" json:"Line2,omitempty"`
-	City                 string              `protobuf:"bytes,3,opt,name=City,proto3" json:"City,omitempty"`
-	PostalCode           string              `protobuf:"bytes,4,opt,name=PostalCode,proto3" json:"PostalCode,omitempty"`
-	CountrySubdivision   *CountrySubdivision `protobuf:"bytes,5,opt,name=CountrySubdivision,proto3" json:"CountrySubdivision,omitempty"`
-	Country              *Country            `protobuf:"bytes,6,opt,name=Country,proto3" json:"Country,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}            `json:"-"`
-	XXX_unrecognized     []byte              `json:"-"`
-	XXX_sizecache        int32               `json:"-"`
+	Line1                string   `protobuf:"bytes,1,opt,name=line1,proto3" json:"line1,omitempty"`
+	Line2                string   `protobuf:"bytes,2,opt,name=line2,proto3" json:"line2,omitempty"`
+	City                 string   `protobuf:"bytes,3,opt,name=city,proto3" json:"city,omitempty"`
+	CountrySubdivision   string   `protobuf:"bytes,4,opt,name=countrySubdivision,proto3" json:"countrySubdivision,omitempty"`
+	PostalCode           string   `protobuf:"bytes,5,opt,name=postalCode,proto3" json:"postalCode,omitempty"`
+	Country              string   `protobuf:"bytes,6,opt,name=country,proto3" json:"country,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *Address) Reset()         { *m = Address{} }
@@ -430,6 +430,13 @@ func (m *Address) GetCity() string {
 	return ""
 }
 
+func (m *Address) GetCountrySubdivision() string {
+	if m != nil {
+		return m.CountrySubdivision
+	}
+	return ""
+}
+
 func (m *Address) GetPostalCode() string {
 	if m != nil {
 		return m.PostalCode
@@ -437,18 +444,66 @@ func (m *Address) GetPostalCode() string {
 	return ""
 }
 
-func (m *Address) GetCountrySubdivision() *CountrySubdivision {
-	if m != nil {
-		return m.CountrySubdivision
-	}
-	return nil
-}
-
-func (m *Address) GetCountry() *Country {
+func (m *Address) GetCountry() string {
 	if m != nil {
 		return m.Country
 	}
-	return nil
+	return ""
+}
+
+type TokenCryptogram struct {
+	Type                 string   `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"`
+	Value                string   `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
+	PanSequenceNumber    string   `protobuf:"bytes,3,opt,name=panSequenceNumber,proto3" json:"panSequenceNumber,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *TokenCryptogram) Reset()         { *m = TokenCryptogram{} }
+func (m *TokenCryptogram) String() string { return proto.CompactTextString(m) }
+func (*TokenCryptogram) ProtoMessage()    {}
+func (*TokenCryptogram) Descriptor() ([]byte, []int) {
+	return fileDescriptor_d4ec760cea500d20, []int{7}
+}
+
+func (m *TokenCryptogram) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_TokenCryptogram.Unmarshal(m, b)
+}
+func (m *TokenCryptogram) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_TokenCryptogram.Marshal(b, m, deterministic)
+}
+func (m *TokenCryptogram) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_TokenCryptogram.Merge(m, src)
+}
+func (m *TokenCryptogram) XXX_Size() int {
+	return xxx_messageInfo_TokenCryptogram.Size(m)
+}
+func (m *TokenCryptogram) XXX_DiscardUnknown() {
+	xxx_messageInfo_TokenCryptogram.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_TokenCryptogram proto.InternalMessageInfo
+
+func (m *TokenCryptogram) GetType() string {
+	if m != nil {
+		return m.Type
+	}
+	return ""
+}
+
+func (m *TokenCryptogram) GetValue() string {
+	if m != nil {
+		return m.Value
+	}
+	return ""
+}
+
+func (m *TokenCryptogram) GetPanSequenceNumber() string {
+	if m != nil {
+		return m.PanSequenceNumber
+	}
+	return ""
 }
 
 type MastercardCurrencyConversionRequest struct {
@@ -471,7 +526,7 @@ func (m *MastercardCurrencyConversionRequest) Reset()         { *m = MastercardC
 func (m *MastercardCurrencyConversionRequest) String() string { return proto.CompactTextString(m) }
 func (*MastercardCurrencyConversionRequest) ProtoMessage()    {}
 func (*MastercardCurrencyConversionRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_d4ec760cea500d20, []int{7}
+	return fileDescriptor_d4ec760cea500d20, []int{8}
 }
 
 func (m *MastercardCurrencyConversionRequest) XXX_Unmarshal(b []byte) error {
@@ -538,7 +593,7 @@ func (m *MastercardCurrencyConversionReply) Reset()         { *m = MastercardCur
 func (m *MastercardCurrencyConversionReply) String() string { return proto.CompactTextString(m) }
 func (*MastercardCurrencyConversionReply) ProtoMessage()    {}
 func (*MastercardCurrencyConversionReply) Descriptor() ([]byte, []int) {
-	return fileDescriptor_d4ec760cea500d20, []int{8}
+	return fileDescriptor_d4ec760cea500d20, []int{9}
 }
 
 func (m *MastercardCurrencyConversionReply) XXX_Unmarshal(b []byte) error {
@@ -588,7 +643,7 @@ func (m *CurrencyResponse) Reset()         { *m = CurrencyResponse{} }
 func (m *CurrencyResponse) String() string { return proto.CompactTextString(m) }
 func (*CurrencyResponse) ProtoMessage()    {}
 func (*CurrencyResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_d4ec760cea500d20, []int{9}
+	return fileDescriptor_d4ec760cea500d20, []int{10}
 }
 
 func (m *CurrencyResponse) XXX_Unmarshal(b []byte) error {
@@ -680,7 +735,7 @@ func (m *CurrencyDataResponse) Reset()         { *m = CurrencyDataResponse{} }
 func (m *CurrencyDataResponse) String() string { return proto.CompactTextString(m) }
 func (*CurrencyDataResponse) ProtoMessage()    {}
 func (*CurrencyDataResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_d4ec760cea500d20, []int{10}
+	return fileDescriptor_d4ec760cea500d20, []int{11}
 }
 
 func (m *CurrencyDataResponse) XXX_Unmarshal(b []byte) error {
@@ -764,6 +819,1268 @@ func (m *CurrencyDataResponse) GetErrorMessage() string {
 	return ""
 }
 
+type Sender struct {
+	FirstName            string           `protobuf:"bytes,1,opt,name=firstName,proto3" json:"firstName,omitempty"`
+	MiddleName           string           `protobuf:"bytes,2,opt,name=middleName,proto3" json:"middleName,omitempty"`
+	LastName             string           `protobuf:"bytes,3,opt,name=lastName,proto3" json:"lastName,omitempty"`
+	Address              *Address         `protobuf:"bytes,4,opt,name=address,proto3" json:"address,omitempty"`
+	Phone                string           `protobuf:"bytes,5,opt,name=phone,proto3" json:"phone,omitempty"`
+	Email                string           `protobuf:"bytes,6,opt,name=email,proto3" json:"email,omitempty"`
+	AuthenticationValue  string           `protobuf:"bytes,7,opt,name=authenticationValue,proto3" json:"authenticationValue,omitempty"`
+	TokenCryptogram      *TokenCryptogram `protobuf:"bytes,8,opt,name=tokenCryptogram,proto3" json:"tokenCryptogram,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}         `json:"-"`
+	XXX_unrecognized     []byte           `json:"-"`
+	XXX_sizecache        int32            `json:"-"`
+}
+
+func (m *Sender) Reset()         { *m = Sender{} }
+func (m *Sender) String() string { return proto.CompactTextString(m) }
+func (*Sender) ProtoMessage()    {}
+func (*Sender) Descriptor() ([]byte, []int) {
+	return fileDescriptor_d4ec760cea500d20, []int{12}
+}
+
+func (m *Sender) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Sender.Unmarshal(m, b)
+}
+func (m *Sender) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Sender.Marshal(b, m, deterministic)
+}
+func (m *Sender) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Sender.Merge(m, src)
+}
+func (m *Sender) XXX_Size() int {
+	return xxx_messageInfo_Sender.Size(m)
+}
+func (m *Sender) XXX_DiscardUnknown() {
+	xxx_messageInfo_Sender.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Sender proto.InternalMessageInfo
+
+func (m *Sender) GetFirstName() string {
+	if m != nil {
+		return m.FirstName
+	}
+	return ""
+}
+
+func (m *Sender) GetMiddleName() string {
+	if m != nil {
+		return m.MiddleName
+	}
+	return ""
+}
+
+func (m *Sender) GetLastName() string {
+	if m != nil {
+		return m.LastName
+	}
+	return ""
+}
+
+func (m *Sender) GetAddress() *Address {
+	if m != nil {
+		return m.Address
+	}
+	return nil
+}
+
+func (m *Sender) GetPhone() string {
+	if m != nil {
+		return m.Phone
+	}
+	return ""
+}
+
+func (m *Sender) GetEmail() string {
+	if m != nil {
+		return m.Email
+	}
+	return ""
+}
+
+func (m *Sender) GetAuthenticationValue() string {
+	if m != nil {
+		return m.AuthenticationValue
+	}
+	return ""
+}
+
+func (m *Sender) GetTokenCryptogram() *TokenCryptogram {
+	if m != nil {
+		return m.TokenCryptogram
+	}
+	return nil
+}
+
+type MerchantTransfer struct {
+	TransferReference         string              `protobuf:"bytes,1,opt,name=transferReference,proto3" json:"transferReference,omitempty"`
+	PaymentType               string              `protobuf:"bytes,2,opt,name=paymentType,proto3" json:"paymentType,omitempty"`
+	PaymentOriginationCountry string              `protobuf:"bytes,3,opt,name=paymentOriginationCountry,proto3" json:"paymentOriginationCountry,omitempty"`
+	TransactionLocalDateTime  string              `protobuf:"bytes,4,opt,name=transactionLocalDateTime,proto3" json:"transactionLocalDateTime,omitempty"`
+	TransferAmount            *TransferAmount     `protobuf:"bytes,5,opt,name=transferAmount,proto3" json:"transferAmount,omitempty"`
+	SenderAccountUri          string              `protobuf:"bytes,6,opt,name=senderAccountUri,proto3" json:"senderAccountUri,omitempty"`
+	Sender                    *Sender             `protobuf:"bytes,7,opt,name=sender,proto3" json:"sender,omitempty"`
+	RecipientAccountUri       string              `protobuf:"bytes,8,opt,name=recipientAccountUri,proto3" json:"recipientAccountUri,omitempty"`
+	Recipient                 *Recipient          `protobuf:"bytes,9,opt,name=recipient,proto3" json:"recipient,omitempty"`
+	ReconciliationData        *ReconciliationData `protobuf:"bytes,10,opt,name=reconciliationData,proto3" json:"reconciliationData,omitempty"`
+	MastercardAssignedId      string              `protobuf:"bytes,11,opt,name=mastercardAssignedId,proto3" json:"mastercardAssignedId,omitempty"`
+	RoutingTransitNumber      string              `protobuf:"bytes,12,opt,name=routingTransitNumber,proto3" json:"routingTransitNumber,omitempty"`
+	ProcessorId               string              `protobuf:"bytes,13,opt,name=processorId,proto3" json:"processorId,omitempty"`
+	AdditionalMessage         string              `protobuf:"bytes,14,opt,name=additionalMessage,proto3" json:"additionalMessage,omitempty"`
+	ParticipationId           string              `protobuf:"bytes,15,opt,name=participationId,proto3" json:"participationId,omitempty"`
+	ConvenienceAmount         string              `protobuf:"bytes,16,opt,name=convenienceAmount,proto3" json:"convenienceAmount,omitempty"`
+	ConvenienceIndicator      string              `protobuf:"bytes,17,opt,name=convenienceIndicator,proto3" json:"convenienceIndicator,omitempty"`
+	InterchangeRateDesignator string              `protobuf:"bytes,18,opt,name=interchangeRateDesignator,proto3" json:"interchangeRateDesignator,omitempty"`
+	QrData                    string              `protobuf:"bytes,19,opt,name=qrData,proto3" json:"qrData,omitempty"`
+	UniqueReferenceNumber     string              `protobuf:"bytes,20,opt,name=uniqueReferenceNumber,proto3" json:"uniqueReferenceNumber,omitempty"`
+	Participant               *Participant        `protobuf:"bytes,21,opt,name=participant,proto3" json:"participant,omitempty"`
+	XXX_NoUnkeyedLiteral      struct{}            `json:"-"`
+	XXX_unrecognized          []byte              `json:"-"`
+	XXX_sizecache             int32               `json:"-"`
+}
+
+func (m *MerchantTransfer) Reset()         { *m = MerchantTransfer{} }
+func (m *MerchantTransfer) String() string { return proto.CompactTextString(m) }
+func (*MerchantTransfer) ProtoMessage()    {}
+func (*MerchantTransfer) Descriptor() ([]byte, []int) {
+	return fileDescriptor_d4ec760cea500d20, []int{13}
+}
+
+func (m *MerchantTransfer) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_MerchantTransfer.Unmarshal(m, b)
+}
+func (m *MerchantTransfer) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_MerchantTransfer.Marshal(b, m, deterministic)
+}
+func (m *MerchantTransfer) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MerchantTransfer.Merge(m, src)
+}
+func (m *MerchantTransfer) XXX_Size() int {
+	return xxx_messageInfo_MerchantTransfer.Size(m)
+}
+func (m *MerchantTransfer) XXX_DiscardUnknown() {
+	xxx_messageInfo_MerchantTransfer.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MerchantTransfer proto.InternalMessageInfo
+
+func (m *MerchantTransfer) GetTransferReference() string {
+	if m != nil {
+		return m.TransferReference
+	}
+	return ""
+}
+
+func (m *MerchantTransfer) GetPaymentType() string {
+	if m != nil {
+		return m.PaymentType
+	}
+	return ""
+}
+
+func (m *MerchantTransfer) GetPaymentOriginationCountry() string {
+	if m != nil {
+		return m.PaymentOriginationCountry
+	}
+	return ""
+}
+
+func (m *MerchantTransfer) GetTransactionLocalDateTime() string {
+	if m != nil {
+		return m.TransactionLocalDateTime
+	}
+	return ""
+}
+
+func (m *MerchantTransfer) GetTransferAmount() *TransferAmount {
+	if m != nil {
+		return m.TransferAmount
+	}
+	return nil
+}
+
+func (m *MerchantTransfer) GetSenderAccountUri() string {
+	if m != nil {
+		return m.SenderAccountUri
+	}
+	return ""
+}
+
+func (m *MerchantTransfer) GetSender() *Sender {
+	if m != nil {
+		return m.Sender
+	}
+	return nil
+}
+
+func (m *MerchantTransfer) GetRecipientAccountUri() string {
+	if m != nil {
+		return m.RecipientAccountUri
+	}
+	return ""
+}
+
+func (m *MerchantTransfer) GetRecipient() *Recipient {
+	if m != nil {
+		return m.Recipient
+	}
+	return nil
+}
+
+func (m *MerchantTransfer) GetReconciliationData() *ReconciliationData {
+	if m != nil {
+		return m.ReconciliationData
+	}
+	return nil
+}
+
+func (m *MerchantTransfer) GetMastercardAssignedId() string {
+	if m != nil {
+		return m.MastercardAssignedId
+	}
+	return ""
+}
+
+func (m *MerchantTransfer) GetRoutingTransitNumber() string {
+	if m != nil {
+		return m.RoutingTransitNumber
+	}
+	return ""
+}
+
+func (m *MerchantTransfer) GetProcessorId() string {
+	if m != nil {
+		return m.ProcessorId
+	}
+	return ""
+}
+
+func (m *MerchantTransfer) GetAdditionalMessage() string {
+	if m != nil {
+		return m.AdditionalMessage
+	}
+	return ""
+}
+
+func (m *MerchantTransfer) GetParticipationId() string {
+	if m != nil {
+		return m.ParticipationId
+	}
+	return ""
+}
+
+func (m *MerchantTransfer) GetConvenienceAmount() string {
+	if m != nil {
+		return m.ConvenienceAmount
+	}
+	return ""
+}
+
+func (m *MerchantTransfer) GetConvenienceIndicator() string {
+	if m != nil {
+		return m.ConvenienceIndicator
+	}
+	return ""
+}
+
+func (m *MerchantTransfer) GetInterchangeRateDesignator() string {
+	if m != nil {
+		return m.InterchangeRateDesignator
+	}
+	return ""
+}
+
+func (m *MerchantTransfer) GetQrData() string {
+	if m != nil {
+		return m.QrData
+	}
+	return ""
+}
+
+func (m *MerchantTransfer) GetUniqueReferenceNumber() string {
+	if m != nil {
+		return m.UniqueReferenceNumber
+	}
+	return ""
+}
+
+func (m *MerchantTransfer) GetParticipant() *Participant {
+	if m != nil {
+		return m.Participant
+	}
+	return nil
+}
+
+type Recipient struct {
+	FirstName            string           `protobuf:"bytes,1,opt,name=firstName,proto3" json:"firstName,omitempty"`
+	MiddleName           string           `protobuf:"bytes,2,opt,name=middleName,proto3" json:"middleName,omitempty"`
+	LastName             string           `protobuf:"bytes,3,opt,name=lastName,proto3" json:"lastName,omitempty"`
+	Address              *Address         `protobuf:"bytes,4,opt,name=address,proto3" json:"address,omitempty"`
+	Phone                string           `protobuf:"bytes,5,opt,name=phone,proto3" json:"phone,omitempty"`
+	Email                string           `protobuf:"bytes,6,opt,name=email,proto3" json:"email,omitempty"`
+	AuthenticationValue  string           `protobuf:"bytes,7,opt,name=authenticationValue,proto3" json:"authenticationValue,omitempty"`
+	TokenCryptogram      *TokenCryptogram `protobuf:"bytes,8,opt,name=tokenCryptogram,proto3" json:"tokenCryptogram,omitempty"`
+	MerchantCategoryCode string           `protobuf:"bytes,9,opt,name=merchantCategoryCode,proto3" json:"merchantCategoryCode,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}         `json:"-"`
+	XXX_unrecognized     []byte           `json:"-"`
+	XXX_sizecache        int32            `json:"-"`
+}
+
+func (m *Recipient) Reset()         { *m = Recipient{} }
+func (m *Recipient) String() string { return proto.CompactTextString(m) }
+func (*Recipient) ProtoMessage()    {}
+func (*Recipient) Descriptor() ([]byte, []int) {
+	return fileDescriptor_d4ec760cea500d20, []int{14}
+}
+
+func (m *Recipient) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Recipient.Unmarshal(m, b)
+}
+func (m *Recipient) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Recipient.Marshal(b, m, deterministic)
+}
+func (m *Recipient) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Recipient.Merge(m, src)
+}
+func (m *Recipient) XXX_Size() int {
+	return xxx_messageInfo_Recipient.Size(m)
+}
+func (m *Recipient) XXX_DiscardUnknown() {
+	xxx_messageInfo_Recipient.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Recipient proto.InternalMessageInfo
+
+func (m *Recipient) GetFirstName() string {
+	if m != nil {
+		return m.FirstName
+	}
+	return ""
+}
+
+func (m *Recipient) GetMiddleName() string {
+	if m != nil {
+		return m.MiddleName
+	}
+	return ""
+}
+
+func (m *Recipient) GetLastName() string {
+	if m != nil {
+		return m.LastName
+	}
+	return ""
+}
+
+func (m *Recipient) GetAddress() *Address {
+	if m != nil {
+		return m.Address
+	}
+	return nil
+}
+
+func (m *Recipient) GetPhone() string {
+	if m != nil {
+		return m.Phone
+	}
+	return ""
+}
+
+func (m *Recipient) GetEmail() string {
+	if m != nil {
+		return m.Email
+	}
+	return ""
+}
+
+func (m *Recipient) GetAuthenticationValue() string {
+	if m != nil {
+		return m.AuthenticationValue
+	}
+	return ""
+}
+
+func (m *Recipient) GetTokenCryptogram() *TokenCryptogram {
+	if m != nil {
+		return m.TokenCryptogram
+	}
+	return nil
+}
+
+func (m *Recipient) GetMerchantCategoryCode() string {
+	if m != nil {
+		return m.MerchantCategoryCode
+	}
+	return ""
+}
+
+type TransferAmount struct {
+	Value                string   `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty"`
+	Currency             string   `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *TransferAmount) Reset()         { *m = TransferAmount{} }
+func (m *TransferAmount) String() string { return proto.CompactTextString(m) }
+func (*TransferAmount) ProtoMessage()    {}
+func (*TransferAmount) Descriptor() ([]byte, []int) {
+	return fileDescriptor_d4ec760cea500d20, []int{15}
+}
+
+func (m *TransferAmount) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_TransferAmount.Unmarshal(m, b)
+}
+func (m *TransferAmount) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_TransferAmount.Marshal(b, m, deterministic)
+}
+func (m *TransferAmount) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_TransferAmount.Merge(m, src)
+}
+func (m *TransferAmount) XXX_Size() int {
+	return xxx_messageInfo_TransferAmount.Size(m)
+}
+func (m *TransferAmount) XXX_DiscardUnknown() {
+	xxx_messageInfo_TransferAmount.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_TransferAmount proto.InternalMessageInfo
+
+func (m *TransferAmount) GetValue() string {
+	if m != nil {
+		return m.Value
+	}
+	return ""
+}
+
+func (m *TransferAmount) GetCurrency() string {
+	if m != nil {
+		return m.Currency
+	}
+	return ""
+}
+
+type TransactionAmount struct {
+	Value                string   `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty"`
+	Currency             string   `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *TransactionAmount) Reset()         { *m = TransactionAmount{} }
+func (m *TransactionAmount) String() string { return proto.CompactTextString(m) }
+func (*TransactionAmount) ProtoMessage()    {}
+func (*TransactionAmount) Descriptor() ([]byte, []int) {
+	return fileDescriptor_d4ec760cea500d20, []int{16}
+}
+
+func (m *TransactionAmount) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_TransactionAmount.Unmarshal(m, b)
+}
+func (m *TransactionAmount) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_TransactionAmount.Marshal(b, m, deterministic)
+}
+func (m *TransactionAmount) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_TransactionAmount.Merge(m, src)
+}
+func (m *TransactionAmount) XXX_Size() int {
+	return xxx_messageInfo_TransactionAmount.Size(m)
+}
+func (m *TransactionAmount) XXX_DiscardUnknown() {
+	xxx_messageInfo_TransactionAmount.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_TransactionAmount proto.InternalMessageInfo
+
+func (m *TransactionAmount) GetValue() string {
+	if m != nil {
+		return m.Value
+	}
+	return ""
+}
+
+func (m *TransactionAmount) GetCurrency() string {
+	if m != nil {
+		return m.Currency
+	}
+	return ""
+}
+
+type Participant struct {
+	CardAcceptorId       string   `protobuf:"bytes,1,opt,name=cardAcceptorId,proto3" json:"cardAcceptorId,omitempty"`
+	CardAcceptorName     string   `protobuf:"bytes,2,opt,name=cardAcceptorName,proto3" json:"cardAcceptorName,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *Participant) Reset()         { *m = Participant{} }
+func (m *Participant) String() string { return proto.CompactTextString(m) }
+func (*Participant) ProtoMessage()    {}
+func (*Participant) Descriptor() ([]byte, []int) {
+	return fileDescriptor_d4ec760cea500d20, []int{17}
+}
+
+func (m *Participant) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Participant.Unmarshal(m, b)
+}
+func (m *Participant) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Participant.Marshal(b, m, deterministic)
+}
+func (m *Participant) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Participant.Merge(m, src)
+}
+func (m *Participant) XXX_Size() int {
+	return xxx_messageInfo_Participant.Size(m)
+}
+func (m *Participant) XXX_DiscardUnknown() {
+	xxx_messageInfo_Participant.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Participant proto.InternalMessageInfo
+
+func (m *Participant) GetCardAcceptorId() string {
+	if m != nil {
+		return m.CardAcceptorId
+	}
+	return ""
+}
+
+func (m *Participant) GetCardAcceptorName() string {
+	if m != nil {
+		return m.CardAcceptorName
+	}
+	return ""
+}
+
+type CustomField struct {
+	Name                 string   `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Value                string   `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *CustomField) Reset()         { *m = CustomField{} }
+func (m *CustomField) String() string { return proto.CompactTextString(m) }
+func (*CustomField) ProtoMessage()    {}
+func (*CustomField) Descriptor() ([]byte, []int) {
+	return fileDescriptor_d4ec760cea500d20, []int{18}
+}
+
+func (m *CustomField) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CustomField.Unmarshal(m, b)
+}
+func (m *CustomField) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CustomField.Marshal(b, m, deterministic)
+}
+func (m *CustomField) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CustomField.Merge(m, src)
+}
+func (m *CustomField) XXX_Size() int {
+	return xxx_messageInfo_CustomField.Size(m)
+}
+func (m *CustomField) XXX_DiscardUnknown() {
+	xxx_messageInfo_CustomField.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CustomField proto.InternalMessageInfo
+
+func (m *CustomField) GetName() string {
+	if m != nil {
+		return m.Name
+	}
+	return ""
+}
+
+func (m *CustomField) GetValue() string {
+	if m != nil {
+		return m.Value
+	}
+	return ""
+}
+
+type ReconciliationData struct {
+	CustomField          []*CustomField `protobuf:"bytes,1,rep,name=customField,proto3" json:"customField,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}       `json:"-"`
+	XXX_unrecognized     []byte         `json:"-"`
+	XXX_sizecache        int32          `json:"-"`
+}
+
+func (m *ReconciliationData) Reset()         { *m = ReconciliationData{} }
+func (m *ReconciliationData) String() string { return proto.CompactTextString(m) }
+func (*ReconciliationData) ProtoMessage()    {}
+func (*ReconciliationData) Descriptor() ([]byte, []int) {
+	return fileDescriptor_d4ec760cea500d20, []int{19}
+}
+
+func (m *ReconciliationData) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ReconciliationData.Unmarshal(m, b)
+}
+func (m *ReconciliationData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ReconciliationData.Marshal(b, m, deterministic)
+}
+func (m *ReconciliationData) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ReconciliationData.Merge(m, src)
+}
+func (m *ReconciliationData) XXX_Size() int {
+	return xxx_messageInfo_ReconciliationData.Size(m)
+}
+func (m *ReconciliationData) XXX_DiscardUnknown() {
+	xxx_messageInfo_ReconciliationData.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ReconciliationData proto.InternalMessageInfo
+
+func (m *ReconciliationData) GetCustomField() []*CustomField {
+	if m != nil {
+		return m.CustomField
+	}
+	return nil
+}
+
+type MerchantTransferFundingAndPaymentRequest struct {
+	PartnerId            string            `protobuf:"bytes,1,opt,name=partnerId,proto3" json:"partnerId,omitempty"`
+	MerchantTransfer     *MerchantTransfer `protobuf:"bytes,2,opt,name=merchantTransfer,proto3" json:"merchantTransfer,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
+	XXX_unrecognized     []byte            `json:"-"`
+	XXX_sizecache        int32             `json:"-"`
+}
+
+func (m *MerchantTransferFundingAndPaymentRequest) Reset() {
+	*m = MerchantTransferFundingAndPaymentRequest{}
+}
+func (m *MerchantTransferFundingAndPaymentRequest) String() string { return proto.CompactTextString(m) }
+func (*MerchantTransferFundingAndPaymentRequest) ProtoMessage()    {}
+func (*MerchantTransferFundingAndPaymentRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_d4ec760cea500d20, []int{20}
+}
+
+func (m *MerchantTransferFundingAndPaymentRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_MerchantTransferFundingAndPaymentRequest.Unmarshal(m, b)
+}
+func (m *MerchantTransferFundingAndPaymentRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_MerchantTransferFundingAndPaymentRequest.Marshal(b, m, deterministic)
+}
+func (m *MerchantTransferFundingAndPaymentRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MerchantTransferFundingAndPaymentRequest.Merge(m, src)
+}
+func (m *MerchantTransferFundingAndPaymentRequest) XXX_Size() int {
+	return xxx_messageInfo_MerchantTransferFundingAndPaymentRequest.Size(m)
+}
+func (m *MerchantTransferFundingAndPaymentRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_MerchantTransferFundingAndPaymentRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MerchantTransferFundingAndPaymentRequest proto.InternalMessageInfo
+
+func (m *MerchantTransferFundingAndPaymentRequest) GetPartnerId() string {
+	if m != nil {
+		return m.PartnerId
+	}
+	return ""
+}
+
+func (m *MerchantTransferFundingAndPaymentRequest) GetMerchantTransfer() *MerchantTransfer {
+	if m != nil {
+		return m.MerchantTransfer
+	}
+	return nil
+}
+
+type MerchantTransferFundingAndPaymentResponse struct {
+	MerchantTransfer     *MerchantTransferResponse `protobuf:"bytes,1,opt,name=merchantTransfer,proto3" json:"merchantTransfer,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                  `json:"-"`
+	XXX_unrecognized     []byte                    `json:"-"`
+	XXX_sizecache        int32                     `json:"-"`
+}
+
+func (m *MerchantTransferFundingAndPaymentResponse) Reset() {
+	*m = MerchantTransferFundingAndPaymentResponse{}
+}
+func (m *MerchantTransferFundingAndPaymentResponse) String() string { return proto.CompactTextString(m) }
+func (*MerchantTransferFundingAndPaymentResponse) ProtoMessage()    {}
+func (*MerchantTransferFundingAndPaymentResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_d4ec760cea500d20, []int{21}
+}
+
+func (m *MerchantTransferFundingAndPaymentResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_MerchantTransferFundingAndPaymentResponse.Unmarshal(m, b)
+}
+func (m *MerchantTransferFundingAndPaymentResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_MerchantTransferFundingAndPaymentResponse.Marshal(b, m, deterministic)
+}
+func (m *MerchantTransferFundingAndPaymentResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MerchantTransferFundingAndPaymentResponse.Merge(m, src)
+}
+func (m *MerchantTransferFundingAndPaymentResponse) XXX_Size() int {
+	return xxx_messageInfo_MerchantTransferFundingAndPaymentResponse.Size(m)
+}
+func (m *MerchantTransferFundingAndPaymentResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_MerchantTransferFundingAndPaymentResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MerchantTransferFundingAndPaymentResponse proto.InternalMessageInfo
+
+func (m *MerchantTransferFundingAndPaymentResponse) GetMerchantTransfer() *MerchantTransferResponse {
+	if m != nil {
+		return m.MerchantTransfer
+	}
+	return nil
+}
+
+type MerchantTransferResponse struct {
+	Id                            string              `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	ResourceType                  string              `protobuf:"bytes,2,opt,name=resourceType,proto3" json:"resourceType,omitempty"`
+	TransferReference             string              `protobuf:"bytes,3,opt,name=transferReference,proto3" json:"transferReference,omitempty"`
+	PaymentTypeb                  string              `protobuf:"bytes,26,opt,name=paymentTypeb,proto3" json:"paymentTypeb,omitempty"`
+	SenderAccountUri              string              `protobuf:"bytes,4,opt,name=senderAccountUri,proto3" json:"senderAccountUri,omitempty"`
+	DigitalAccountReferenceNumber string              `protobuf:"bytes,5,opt,name=digitalAccountReferenceNumber,proto3" json:"digitalAccountReferenceNumber,omitempty"`
+	Sender                        *Sender             `protobuf:"bytes,6,opt,name=sender,proto3" json:"sender,omitempty"`
+	RecipientAccountUri           string              `protobuf:"bytes,7,opt,name=recipientAccountUri,proto3" json:"recipientAccountUri,omitempty"`
+	Recipient                     *Recipient          `protobuf:"bytes,8,opt,name=recipient,proto3" json:"recipient,omitempty"`
+	TransferAmount                *TransferAmount     `protobuf:"bytes,9,opt,name=transferAmount,proto3" json:"transferAmount,omitempty"`
+	Created                       string              `protobuf:"bytes,10,opt,name=created,proto3" json:"created,omitempty"`
+	TransactionHistory            *TransactionHistory `protobuf:"bytes,11,opt,name=transactionHistory,proto3" json:"transactionHistory,omitempty"`
+	ReconciliationData            *ReconciliationData `protobuf:"bytes,25,opt,name=reconciliationData,proto3" json:"reconciliationData,omitempty"`
+	PaymentOriginationCountry     string              `protobuf:"bytes,12,opt,name=payment_origination_country,json=paymentOriginationCountry,proto3" json:"payment_origination_country,omitempty"`
+	OriginalStatus                string              `protobuf:"bytes,13,opt,name=original_status,json=originalStatus,proto3" json:"original_status,omitempty"`
+	Status                        string              `protobuf:"bytes,14,opt,name=status,proto3" json:"status,omitempty"`
+	StatusTimestamp               string              `protobuf:"bytes,15,opt,name=statusTimestamp,proto3" json:"statusTimestamp,omitempty"`
+	TransactionLocalDateTime      string              `protobuf:"bytes,16,opt,name=transactionLocalDateTime,proto3" json:"transactionLocalDateTime,omitempty"`
+	MastercardAssignedId          string              `protobuf:"bytes,17,opt,name=mastercardAssignedId,proto3" json:"mastercardAssignedId,omitempty"`
+	FundingSource                 string              `protobuf:"bytes,18,opt,name=fundingSource,proto3" json:"fundingSource,omitempty"`
+	RoutingTransitNumber          string              `protobuf:"bytes,19,opt,name=routingTransitNumber,proto3" json:"routingTransitNumber,omitempty"`
+	ProcessorId                   string              `protobuf:"bytes,20,opt,name=processorId,proto3" json:"processorId,omitempty"`
+	Participant                   *Participant        `protobuf:"bytes,21,opt,name=participant,proto3" json:"participant,omitempty"`
+	AdditionalMessage             string              `protobuf:"bytes,22,opt,name=additionalMessage,proto3" json:"additionalMessage,omitempty"`
+	ParticipationId               string              `protobuf:"bytes,23,opt,name=participationId,proto3" json:"participationId,omitempty"`
+	InterchangeRateDesignator     string              `protobuf:"bytes,24,opt,name=interchangeRateDesignator,proto3" json:"interchangeRateDesignator,omitempty"`
+	XXX_NoUnkeyedLiteral          struct{}            `json:"-"`
+	XXX_unrecognized              []byte              `json:"-"`
+	XXX_sizecache                 int32               `json:"-"`
+}
+
+func (m *MerchantTransferResponse) Reset()         { *m = MerchantTransferResponse{} }
+func (m *MerchantTransferResponse) String() string { return proto.CompactTextString(m) }
+func (*MerchantTransferResponse) ProtoMessage()    {}
+func (*MerchantTransferResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_d4ec760cea500d20, []int{22}
+}
+
+func (m *MerchantTransferResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_MerchantTransferResponse.Unmarshal(m, b)
+}
+func (m *MerchantTransferResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_MerchantTransferResponse.Marshal(b, m, deterministic)
+}
+func (m *MerchantTransferResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MerchantTransferResponse.Merge(m, src)
+}
+func (m *MerchantTransferResponse) XXX_Size() int {
+	return xxx_messageInfo_MerchantTransferResponse.Size(m)
+}
+func (m *MerchantTransferResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_MerchantTransferResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MerchantTransferResponse proto.InternalMessageInfo
+
+func (m *MerchantTransferResponse) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
+func (m *MerchantTransferResponse) GetResourceType() string {
+	if m != nil {
+		return m.ResourceType
+	}
+	return ""
+}
+
+func (m *MerchantTransferResponse) GetTransferReference() string {
+	if m != nil {
+		return m.TransferReference
+	}
+	return ""
+}
+
+func (m *MerchantTransferResponse) GetPaymentTypeb() string {
+	if m != nil {
+		return m.PaymentTypeb
+	}
+	return ""
+}
+
+func (m *MerchantTransferResponse) GetSenderAccountUri() string {
+	if m != nil {
+		return m.SenderAccountUri
+	}
+	return ""
+}
+
+func (m *MerchantTransferResponse) GetDigitalAccountReferenceNumber() string {
+	if m != nil {
+		return m.DigitalAccountReferenceNumber
+	}
+	return ""
+}
+
+func (m *MerchantTransferResponse) GetSender() *Sender {
+	if m != nil {
+		return m.Sender
+	}
+	return nil
+}
+
+func (m *MerchantTransferResponse) GetRecipientAccountUri() string {
+	if m != nil {
+		return m.RecipientAccountUri
+	}
+	return ""
+}
+
+func (m *MerchantTransferResponse) GetRecipient() *Recipient {
+	if m != nil {
+		return m.Recipient
+	}
+	return nil
+}
+
+func (m *MerchantTransferResponse) GetTransferAmount() *TransferAmount {
+	if m != nil {
+		return m.TransferAmount
+	}
+	return nil
+}
+
+func (m *MerchantTransferResponse) GetCreated() string {
+	if m != nil {
+		return m.Created
+	}
+	return ""
+}
+
+func (m *MerchantTransferResponse) GetTransactionHistory() *TransactionHistory {
+	if m != nil {
+		return m.TransactionHistory
+	}
+	return nil
+}
+
+func (m *MerchantTransferResponse) GetReconciliationData() *ReconciliationData {
+	if m != nil {
+		return m.ReconciliationData
+	}
+	return nil
+}
+
+func (m *MerchantTransferResponse) GetPaymentOriginationCountry() string {
+	if m != nil {
+		return m.PaymentOriginationCountry
+	}
+	return ""
+}
+
+func (m *MerchantTransferResponse) GetOriginalStatus() string {
+	if m != nil {
+		return m.OriginalStatus
+	}
+	return ""
+}
+
+func (m *MerchantTransferResponse) GetStatus() string {
+	if m != nil {
+		return m.Status
+	}
+	return ""
+}
+
+func (m *MerchantTransferResponse) GetStatusTimestamp() string {
+	if m != nil {
+		return m.StatusTimestamp
+	}
+	return ""
+}
+
+func (m *MerchantTransferResponse) GetTransactionLocalDateTime() string {
+	if m != nil {
+		return m.TransactionLocalDateTime
+	}
+	return ""
+}
+
+func (m *MerchantTransferResponse) GetMastercardAssignedId() string {
+	if m != nil {
+		return m.MastercardAssignedId
+	}
+	return ""
+}
+
+func (m *MerchantTransferResponse) GetFundingSource() string {
+	if m != nil {
+		return m.FundingSource
+	}
+	return ""
+}
+
+func (m *MerchantTransferResponse) GetRoutingTransitNumber() string {
+	if m != nil {
+		return m.RoutingTransitNumber
+	}
+	return ""
+}
+
+func (m *MerchantTransferResponse) GetProcessorId() string {
+	if m != nil {
+		return m.ProcessorId
+	}
+	return ""
+}
+
+func (m *MerchantTransferResponse) GetParticipant() *Participant {
+	if m != nil {
+		return m.Participant
+	}
+	return nil
+}
+
+func (m *MerchantTransferResponse) GetAdditionalMessage() string {
+	if m != nil {
+		return m.AdditionalMessage
+	}
+	return ""
+}
+
+func (m *MerchantTransferResponse) GetParticipationId() string {
+	if m != nil {
+		return m.ParticipationId
+	}
+	return ""
+}
+
+func (m *MerchantTransferResponse) GetInterchangeRateDesignator() string {
+	if m != nil {
+		return m.InterchangeRateDesignator
+	}
+	return ""
+}
+
+type TransactionHistory struct {
+	ResourceType         string         `protobuf:"bytes,1,opt,name=resourceType,proto3" json:"resourceType,omitempty"`
+	ItemCount            string         `protobuf:"bytes,2,opt,name=itemCount,proto3" json:"itemCount,omitempty"`
+	Data                 []*Transaction `protobuf:"bytes,3,rep,name=data,proto3" json:"data,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}       `json:"-"`
+	XXX_unrecognized     []byte         `json:"-"`
+	XXX_sizecache        int32          `json:"-"`
+}
+
+func (m *TransactionHistory) Reset()         { *m = TransactionHistory{} }
+func (m *TransactionHistory) String() string { return proto.CompactTextString(m) }
+func (*TransactionHistory) ProtoMessage()    {}
+func (*TransactionHistory) Descriptor() ([]byte, []int) {
+	return fileDescriptor_d4ec760cea500d20, []int{23}
+}
+
+func (m *TransactionHistory) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_TransactionHistory.Unmarshal(m, b)
+}
+func (m *TransactionHistory) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_TransactionHistory.Marshal(b, m, deterministic)
+}
+func (m *TransactionHistory) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_TransactionHistory.Merge(m, src)
+}
+func (m *TransactionHistory) XXX_Size() int {
+	return xxx_messageInfo_TransactionHistory.Size(m)
+}
+func (m *TransactionHistory) XXX_DiscardUnknown() {
+	xxx_messageInfo_TransactionHistory.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_TransactionHistory proto.InternalMessageInfo
+
+func (m *TransactionHistory) GetResourceType() string {
+	if m != nil {
+		return m.ResourceType
+	}
+	return ""
+}
+
+func (m *TransactionHistory) GetItemCount() string {
+	if m != nil {
+		return m.ItemCount
+	}
+	return ""
+}
+
+func (m *TransactionHistory) GetData() []*Transaction {
+	if m != nil {
+		return m.Data
+	}
+	return nil
+}
+
+type Transaction struct {
+	Id                       string             `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	ResourceType             string             `protobuf:"bytes,2,opt,name=resourceType,proto3" json:"resourceType,omitempty"`
+	AccountUri               string             `protobuf:"bytes,3,opt,name=accountUri,proto3" json:"accountUri,omitempty"`
+	TransactionAmount        *TransactionAmount `protobuf:"bytes,4,opt,name=transactionAmount,proto3" json:"transactionAmount,omitempty"`
+	Network                  string             `protobuf:"bytes,5,opt,name=network,proto3" json:"network,omitempty"`
+	NetworkStatusCode        string             `protobuf:"bytes,6,opt,name=networkStatusCode,proto3" json:"networkStatusCode,omitempty"`
+	NetworkStatusDescription string             `protobuf:"bytes,7,opt,name=networkStatusDescription,proto3" json:"networkStatusDescription,omitempty"`
+	FundsAvailability        string             `protobuf:"bytes,8,opt,name=fundsAvailability,proto3" json:"fundsAvailability,omitempty"`
+	Type                     string             `protobuf:"bytes,9,opt,name=type,proto3" json:"type,omitempty"`
+	CreateTimestamp          string             `protobuf:"bytes,10,opt,name=createTimestamp,proto3" json:"createTimestamp,omitempty"`
+	Status                   string             `protobuf:"bytes,11,opt,name=status,proto3" json:"status,omitempty"`
+	StatusReason             string             `protobuf:"bytes,12,opt,name=statusReason,proto3" json:"statusReason,omitempty"`
+	StatusTimestamp          string             `protobuf:"bytes,13,opt,name=statusTimestamp,proto3" json:"statusTimestamp,omitempty"`
+	RetrievalReference       string             `protobuf:"bytes,14,opt,name=retrievalReference,proto3" json:"retrievalReference,omitempty"`
+	SystemTraceAuditNumber   string             `protobuf:"bytes,15,opt,name=systemTraceAuditNumber,proto3" json:"systemTraceAuditNumber,omitempty"`
+	SwitchSerialNumber       string             `protobuf:"bytes,16,opt,name=switchSerialNumber,proto3" json:"switchSerialNumber,omitempty"`
+	UniqueReferenceNumber    string             `protobuf:"bytes,17,opt,name=uniqueReferenceNumber,proto3" json:"uniqueReferenceNumber,omitempty"`
+	AuthorizationId          string             `protobuf:"bytes,18,opt,name=authorizationId,proto3" json:"authorizationId,omitempty"`
+	QrData                   string             `protobuf:"bytes,19,opt,name=qrData,proto3" json:"qrData,omitempty"`
+	ConvenienceIndicator     string             `protobuf:"bytes,20,opt,name=convenienceIndicator,proto3" json:"convenienceIndicator,omitempty"`
+	PaymentAccountReference  string             `protobuf:"bytes,21,opt,name=paymentAccountReference,proto3" json:"paymentAccountReference,omitempty"`
+	XXX_NoUnkeyedLiteral     struct{}           `json:"-"`
+	XXX_unrecognized         []byte             `json:"-"`
+	XXX_sizecache            int32              `json:"-"`
+}
+
+func (m *Transaction) Reset()         { *m = Transaction{} }
+func (m *Transaction) String() string { return proto.CompactTextString(m) }
+func (*Transaction) ProtoMessage()    {}
+func (*Transaction) Descriptor() ([]byte, []int) {
+	return fileDescriptor_d4ec760cea500d20, []int{24}
+}
+
+func (m *Transaction) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Transaction.Unmarshal(m, b)
+}
+func (m *Transaction) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Transaction.Marshal(b, m, deterministic)
+}
+func (m *Transaction) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Transaction.Merge(m, src)
+}
+func (m *Transaction) XXX_Size() int {
+	return xxx_messageInfo_Transaction.Size(m)
+}
+func (m *Transaction) XXX_DiscardUnknown() {
+	xxx_messageInfo_Transaction.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Transaction proto.InternalMessageInfo
+
+func (m *Transaction) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
+func (m *Transaction) GetResourceType() string {
+	if m != nil {
+		return m.ResourceType
+	}
+	return ""
+}
+
+func (m *Transaction) GetAccountUri() string {
+	if m != nil {
+		return m.AccountUri
+	}
+	return ""
+}
+
+func (m *Transaction) GetTransactionAmount() *TransactionAmount {
+	if m != nil {
+		return m.TransactionAmount
+	}
+	return nil
+}
+
+func (m *Transaction) GetNetwork() string {
+	if m != nil {
+		return m.Network
+	}
+	return ""
+}
+
+func (m *Transaction) GetNetworkStatusCode() string {
+	if m != nil {
+		return m.NetworkStatusCode
+	}
+	return ""
+}
+
+func (m *Transaction) GetNetworkStatusDescription() string {
+	if m != nil {
+		return m.NetworkStatusDescription
+	}
+	return ""
+}
+
+func (m *Transaction) GetFundsAvailability() string {
+	if m != nil {
+		return m.FundsAvailability
+	}
+	return ""
+}
+
+func (m *Transaction) GetType() string {
+	if m != nil {
+		return m.Type
+	}
+	return ""
+}
+
+func (m *Transaction) GetCreateTimestamp() string {
+	if m != nil {
+		return m.CreateTimestamp
+	}
+	return ""
+}
+
+func (m *Transaction) GetStatus() string {
+	if m != nil {
+		return m.Status
+	}
+	return ""
+}
+
+func (m *Transaction) GetStatusReason() string {
+	if m != nil {
+		return m.StatusReason
+	}
+	return ""
+}
+
+func (m *Transaction) GetStatusTimestamp() string {
+	if m != nil {
+		return m.StatusTimestamp
+	}
+	return ""
+}
+
+func (m *Transaction) GetRetrievalReference() string {
+	if m != nil {
+		return m.RetrievalReference
+	}
+	return ""
+}
+
+func (m *Transaction) GetSystemTraceAuditNumber() string {
+	if m != nil {
+		return m.SystemTraceAuditNumber
+	}
+	return ""
+}
+
+func (m *Transaction) GetSwitchSerialNumber() string {
+	if m != nil {
+		return m.SwitchSerialNumber
+	}
+	return ""
+}
+
+func (m *Transaction) GetUniqueReferenceNumber() string {
+	if m != nil {
+		return m.UniqueReferenceNumber
+	}
+	return ""
+}
+
+func (m *Transaction) GetAuthorizationId() string {
+	if m != nil {
+		return m.AuthorizationId
+	}
+	return ""
+}
+
+func (m *Transaction) GetQrData() string {
+	if m != nil {
+		return m.QrData
+	}
+	return ""
+}
+
+func (m *Transaction) GetConvenienceIndicator() string {
+	if m != nil {
+		return m.ConvenienceIndicator
+	}
+	return ""
+}
+
+func (m *Transaction) GetPaymentAccountReference() string {
+	if m != nil {
+		return m.PaymentAccountReference
+	}
+	return ""
+}
+
+type ErrorResponse struct {
+	Source               string   `protobuf:"bytes,1,opt,name=source,proto3" json:"source,omitempty"`
+	ReasonCode           string   `protobuf:"bytes,2,opt,name=reasonCode,proto3" json:"reasonCode,omitempty"`
+	Message              string   `protobuf:"bytes,3,opt,name=message,proto3" json:"message,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *ErrorResponse) Reset()         { *m = ErrorResponse{} }
+func (m *ErrorResponse) String() string { return proto.CompactTextString(m) }
+func (*ErrorResponse) ProtoMessage()    {}
+func (*ErrorResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_d4ec760cea500d20, []int{25}
+}
+
+func (m *ErrorResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ErrorResponse.Unmarshal(m, b)
+}
+func (m *ErrorResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ErrorResponse.Marshal(b, m, deterministic)
+}
+func (m *ErrorResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ErrorResponse.Merge(m, src)
+}
+func (m *ErrorResponse) XXX_Size() int {
+	return xxx_messageInfo_ErrorResponse.Size(m)
+}
+func (m *ErrorResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_ErrorResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ErrorResponse proto.InternalMessageInfo
+
+func (m *ErrorResponse) GetSource() string {
+	if m != nil {
+		return m.Source
+	}
+	return ""
+}
+
+func (m *ErrorResponse) GetReasonCode() string {
+	if m != nil {
+		return m.ReasonCode
+	}
+	return ""
+}
+
+func (m *ErrorResponse) GetMessage() string {
+	if m != nil {
+		return m.Message
+	}
+	return ""
+}
+
 func init() {
 	proto.RegisterType((*MastercardRequest)(nil), "mastercard.MastercardRequest")
 	proto.RegisterType((*MastercardReply)(nil), "mastercard.MastercardReply")
@@ -772,70 +2089,164 @@ func init() {
 	proto.RegisterType((*CountrySubdivision)(nil), "mastercard.CountrySubdivision")
 	proto.RegisterType((*Country)(nil), "mastercard.Country")
 	proto.RegisterType((*Address)(nil), "mastercard.Address")
+	proto.RegisterType((*TokenCryptogram)(nil), "mastercard.TokenCryptogram")
 	proto.RegisterType((*MastercardCurrencyConversionRequest)(nil), "mastercard.MastercardCurrencyConversionRequest")
 	proto.RegisterType((*MastercardCurrencyConversionReply)(nil), "mastercard.MastercardCurrencyConversionReply")
 	proto.RegisterType((*CurrencyResponse)(nil), "mastercard.CurrencyResponse")
 	proto.RegisterType((*CurrencyDataResponse)(nil), "mastercard.CurrencyDataResponse")
+	proto.RegisterType((*Sender)(nil), "mastercard.Sender")
+	proto.RegisterType((*MerchantTransfer)(nil), "mastercard.MerchantTransfer")
+	proto.RegisterType((*Recipient)(nil), "mastercard.Recipient")
+	proto.RegisterType((*TransferAmount)(nil), "mastercard.TransferAmount")
+	proto.RegisterType((*TransactionAmount)(nil), "mastercard.TransactionAmount")
+	proto.RegisterType((*Participant)(nil), "mastercard.Participant")
+	proto.RegisterType((*CustomField)(nil), "mastercard.CustomField")
+	proto.RegisterType((*ReconciliationData)(nil), "mastercard.ReconciliationData")
+	proto.RegisterType((*MerchantTransferFundingAndPaymentRequest)(nil), "mastercard.MerchantTransferFundingAndPaymentRequest")
+	proto.RegisterType((*MerchantTransferFundingAndPaymentResponse)(nil), "mastercard.MerchantTransferFundingAndPaymentResponse")
+	proto.RegisterType((*MerchantTransferResponse)(nil), "mastercard.MerchantTransferResponse")
+	proto.RegisterType((*TransactionHistory)(nil), "mastercard.TransactionHistory")
+	proto.RegisterType((*Transaction)(nil), "mastercard.Transaction")
+	proto.RegisterType((*ErrorResponse)(nil), "mastercard.ErrorResponse")
 }
 
 func init() { proto.RegisterFile("proto/mastercard.proto", fileDescriptor_d4ec760cea500d20) }
 
 var fileDescriptor_d4ec760cea500d20 = []byte{
-	// 853 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x55, 0x5f, 0x6f, 0xe3, 0x44,
-	0x10, 0x27, 0x7f, 0x9a, 0x26, 0x13, 0xe0, 0x8e, 0xa5, 0x14, 0x2b, 0x94, 0x23, 0x18, 0x84, 0x2a,
-	0xa4, 0xa6, 0x5c, 0xe0, 0x01, 0x24, 0x5e, 0xee, 0x12, 0x71, 0x3a, 0xd1, 0x56, 0x95, 0x73, 0x42,
-	0xe2, 0x81, 0x87, 0x8d, 0x3d, 0x4d, 0x2c, 0xec, 0x5d, 0xb3, 0xde, 0x54, 0xe7, 0x8f, 0x06, 0xef,
-	0x7c, 0x0d, 0x1e, 0x11, 0x1f, 0x03, 0xed, 0x78, 0xfd, 0x27, 0xae, 0x7b, 0xd7, 0xb7, 0x9d, 0xdf,
-	0xfc, 0x66, 0x66, 0x77, 0xe6, 0xb7, 0xbb, 0x70, 0x9c, 0x28, 0xa9, 0xe5, 0x79, 0xcc, 0x53, 0x8d,
-	0xca, 0xe7, 0x2a, 0x98, 0x11, 0xc0, 0xa0, 0x42, 0x26, 0x9f, 0x6d, 0xa4, 0xdc, 0x44, 0x78, 0x4e,
-	0x9e, 0xf5, 0xee, 0xe6, 0x5c, 0x87, 0x31, 0xa6, 0x9a, 0xc7, 0x49, 0x4e, 0x76, 0x7f, 0x86, 0x0f,
-	0x2e, 0x4b, 0xba, 0x87, 0x7f, 0xec, 0x30, 0xd5, 0xec, 0x09, 0xc0, 0x25, 0x2a, 0x7f, 0xcb, 0x85,
-	0x7e, 0xb9, 0x74, 0x3a, 0xd3, 0xce, 0xe9, 0xc8, 0xab, 0x21, 0xec, 0x18, 0x06, 0x2b, 0xe4, 0xca,
-	0xdf, 0x3a, 0xdd, 0x69, 0xe7, 0xb4, 0xe7, 0x59, 0xcb, 0xbd, 0x80, 0x47, 0xf5, 0x64, 0x49, 0x94,
-	0xb1, 0x1f, 0x60, 0x1c, 0x97, 0x81, 0x29, 0xe5, 0x1a, 0xcf, 0x3f, 0x9e, 0xd5, 0x36, 0x5d, 0xe5,
-	0x4d, 0xbd, 0x3a, 0xd7, 0xfd, 0x15, 0xc6, 0x35, 0x1f, 0x73, 0xe0, 0xf0, 0x12, 0xd3, 0x94, 0x6f,
-	0xd0, 0xee, 0xa8, 0x30, 0xd9, 0x37, 0x30, 0x2c, 0x88, 0x4e, 0x77, 0xda, 0x3b, 0x1d, 0xcf, 0x8f,
-	0xda, 0x0a, 0x78, 0x25, 0xcb, 0xfd, 0xbb, 0x57, 0x85, 0xb0, 0x33, 0x38, 0x7c, 0x16, 0x04, 0x0a,
-	0xd3, 0x62, 0x7b, 0x1f, 0xd6, 0xa3, 0xad, 0xcb, 0x2b, 0x38, 0x6c, 0x0a, 0xe3, 0xeb, 0xad, 0x14,
-	0x78, 0xb5, 0x8b, 0xd7, 0xa8, 0xa8, 0x03, 0x23, 0xaf, 0x0e, 0xb1, 0x13, 0x18, 0x3d, 0x57, 0x5c,
-	0x04, 0x57, 0x3c, 0x46, 0xa7, 0x47, 0xfe, 0x0a, 0x60, 0x5f, 0xc3, 0xe3, 0xa2, 0xf4, 0x82, 0x6b,
-	0xdc, 0x48, 0x95, 0x39, 0x7d, 0x22, 0xdd, 0xc1, 0xd9, 0x29, 0x3c, 0x2a, 0xb0, 0xe5, 0x9a, 0x53,
-	0xbe, 0x03, 0xa2, 0x36, 0x61, 0xf6, 0x15, 0xbc, 0xbf, 0xc4, 0xd4, 0x57, 0x61, 0xa2, 0xa5, 0x7a,
-	0x85, 0xaf, 0xb5, 0x33, 0x20, 0x62, 0x03, 0x65, 0x33, 0x60, 0x17, 0xb8, 0xe1, 0xd1, 0x42, 0xaa,
-	0x44, 0x2a, 0xae, 0x91, 0x92, 0x1e, 0x12, 0xb7, 0xc5, 0x63, 0xba, 0xbe, 0x90, 0x71, 0x8c, 0x42,
-	0x3b, 0xc3, 0xbc, 0xeb, 0xd6, 0x34, 0x22, 0xb9, 0x90, 0x3e, 0xd7, 0xa1, 0x14, 0x2f, 0x97, 0xce,
-	0x88, 0x84, 0x50, 0x43, 0x4c, 0xa5, 0x95, 0x8c, 0xf0, 0x5a, 0xc9, 0x44, 0x85, 0xa8, 0xa5, 0xa2,
-	0x4a, 0x90, 0x57, 0xba, 0xeb, 0x61, 0x73, 0x38, 0xba, 0xe4, 0xda, 0xdf, 0x2e, 0xa4, 0xb8, 0x09,
-	0x03, 0x14, 0x3e, 0xae, 0x7c, 0xa9, 0xd0, 0x19, 0x53, 0xe6, 0x56, 0x9f, 0xfb, 0x23, 0xb0, 0x85,
-	0xdc, 0x09, 0xad, 0xb2, 0xd5, 0x6e, 0x1d, 0x84, 0xb7, 0x61, 0x1a, 0x4a, 0xc1, 0x18, 0xf4, 0xa9,
-	0x56, 0x2e, 0x13, 0x5a, 0x1b, 0x6c, 0x21, 0x03, 0xb4, 0xe3, 0xa2, 0xb5, 0xfb, 0xd4, 0x9c, 0x8d,
-	0xa2, 0x1f, 0x1c, 0xf2, 0x5f, 0xa7, 0x14, 0x0b, 0x3b, 0x82, 0x83, 0x8b, 0x50, 0xe0, 0x53, 0x1b,
-	0x94, 0x1b, 0x05, 0x3a, 0xb7, 0x61, 0xb9, 0x41, 0xb9, 0x42, 0x9d, 0x59, 0x35, 0xd0, 0xda, 0x34,
-	0xf0, 0x5a, 0xa6, 0xda, 0x74, 0x3c, 0x40, 0x2b, 0x81, 0x1a, 0xc2, 0xae, 0xda, 0x0e, 0x47, 0xf3,
-	0x1f, 0xcf, 0x9f, 0xd4, 0x25, 0x7a, 0x97, 0xe5, 0xb5, 0xb5, 0xe5, 0xac, 0x3c, 0x2e, 0x69, 0xa3,
-	0xa1, 0x73, 0xeb, 0xf2, 0x0a, 0x8e, 0xfb, 0x67, 0x07, 0xbe, 0xa8, 0x6e, 0xf3, 0x62, 0xa7, 0x14,
-	0x0a, 0x3f, 0x5b, 0x48, 0x71, 0x8b, 0x8a, 0x6a, 0xd8, 0xc7, 0xe2, 0x18, 0x06, 0x37, 0xaf, 0x97,
-	0x5c, 0x17, 0xcd, 0xb3, 0x96, 0xb9, 0x05, 0x5a, 0x71, 0x91, 0x9a, 0x48, 0xdb, 0x8c, 0x0a, 0x30,
-	0x7a, 0xf5, 0x55, 0xb0, 0x8d, 0x82, 0xe7, 0x61, 0x14, 0x11, 0x25, 0x6f, 0x4d, 0x03, 0x35, 0xfa,
-	0x5b, 0x73, 0xf1, 0xfb, 0x4f, 0x98, 0x77, 0xa8, 0xe7, 0x15, 0x26, 0x9b, 0xc0, 0x90, 0xd2, 0x3d,
-	0x8b, 0x35, 0x35, 0xa5, 0xeb, 0x95, 0xb6, 0xfb, 0x1b, 0x7c, 0xfe, 0xe6, 0xad, 0x9b, 0xa7, 0xe9,
-	0x7b, 0x18, 0x2a, 0x4c, 0x13, 0x29, 0x52, 0xb4, 0x17, 0xff, 0x64, 0xaf, 0x21, 0x36, 0xcc, 0xb3,
-	0x1c, 0xaf, 0x64, 0xbb, 0xff, 0x74, 0xe0, 0x71, 0xd3, 0x6d, 0x46, 0x2c, 0x6a, 0x12, 0x12, 0x56,
-	0x42, 0x3a, 0x4b, 0x4a, 0x09, 0x99, 0xb5, 0x79, 0x3f, 0x02, 0x7b, 0x27, 0xcd, 0x3c, 0xf3, 0x63,
-	0xd7, 0x21, 0x36, 0x83, 0x7e, 0x60, 0xfa, 0xd9, 0xa7, 0x4d, 0x4d, 0x66, 0xf9, 0x1b, 0x3e, 0x2b,
-	0xde, 0xf0, 0xd9, 0xab, 0xe2, 0x0d, 0xf7, 0x88, 0xf7, 0xa6, 0x4e, 0xb0, 0xef, 0x28, 0x17, 0xb7,
-	0x13, 0x9f, 0xb6, 0x1d, 0x70, 0xc9, 0x35, 0x2f, 0x0f, 0x49, 0x6c, 0xf7, 0xaf, 0x2e, 0x1c, 0xb5,
-	0xb9, 0x69, 0x6c, 0x55, 0x1b, 0x8b, 0xa1, 0x77, 0xbd, 0x06, 0xca, 0xbe, 0x84, 0xf7, 0xaa, 0x41,
-	0x9a, 0x7d, 0x75, 0x89, 0xb6, 0x0f, 0xee, 0x6d, 0xbc, 0xd7, 0xd8, 0x78, 0x25, 0xab, 0xfe, 0xfd,
-	0xb2, 0x3a, 0x78, 0xbb, 0xac, 0x06, 0x6f, 0x93, 0xd5, 0x21, 0x15, 0x2e, 0x65, 0x75, 0x02, 0x23,
-	0x54, 0x4a, 0x2a, 0xba, 0x94, 0x43, 0x92, 0x5c, 0x05, 0x30, 0x17, 0xde, 0x25, 0xa3, 0xf8, 0x89,
-	0x46, 0x94, 0x7d, 0x0f, 0x9b, 0xff, 0xdb, 0xa9, 0xff, 0xa9, 0x2b, 0x54, 0xb7, 0xa1, 0x8f, 0xec,
-	0x17, 0x38, 0x7e, 0x81, 0xba, 0xfc, 0xd0, 0x02, 0x14, 0x3a, 0xbc, 0x09, 0x51, 0xa5, 0xec, 0xd3,
-	0xbd, 0xcf, 0xaa, 0xf9, 0x19, 0x4f, 0x3e, 0xb9, 0xcf, 0x9d, 0x44, 0x99, 0xfb, 0x0e, 0xcb, 0xe0,
-	0xa3, 0x17, 0xa8, 0xef, 0x6a, 0x9c, 0x9d, 0xb7, 0xc7, 0xdd, 0x7b, 0x91, 0x27, 0x67, 0x0f, 0x0f,
-	0xa0, 0xd2, 0xeb, 0x01, 0x29, 0xf2, 0xdb, 0xff, 0x03, 0x00, 0x00, 0xff, 0xff, 0x40, 0x74, 0x77,
-	0x04, 0x89, 0x08, 0x00, 0x00,
+	// 2120 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xec, 0x59, 0x5d, 0x6f, 0x1c, 0xb7,
+	0xd5, 0xc6, 0xae, 0x64, 0x49, 0x7b, 0xd6, 0xd6, 0x07, 0x2d, 0xcb, 0x1b, 0x59, 0xf1, 0xab, 0xcc,
+	0x6b, 0xb4, 0x6a, 0xda, 0xc8, 0xc9, 0xc6, 0x6d, 0xd3, 0x22, 0x28, 0x20, 0xaf, 0xec, 0x44, 0x88,
+	0xed, 0x08, 0x23, 0xb5, 0x40, 0x2f, 0x0a, 0x83, 0x9a, 0xa1, 0x56, 0x84, 0x67, 0xc9, 0x35, 0x87,
+	0x2b, 0x67, 0x0b, 0xf4, 0xa6, 0xbd, 0xec, 0x4d, 0xd1, 0xbf, 0x52, 0xa0, 0x40, 0x73, 0xdf, 0xbf,
+	0xd1, 0x7f, 0xd0, 0xcb, 0xde, 0x17, 0x87, 0xe4, 0xcc, 0x70, 0xe7, 0x63, 0x25, 0xeb, 0xba, 0x77,
+	0xcb, 0xf3, 0x41, 0x72, 0x0e, 0xcf, 0x79, 0xce, 0x43, 0x2e, 0x6c, 0x8d, 0x95, 0xd4, 0xf2, 0xf1,
+	0x88, 0xa6, 0x9a, 0xa9, 0x88, 0xaa, 0x78, 0xdf, 0x08, 0x08, 0x14, 0x92, 0xed, 0xff, 0x1b, 0x4a,
+	0x39, 0x4c, 0xd8, 0x63, 0xa3, 0x39, 0x9b, 0x9c, 0x3f, 0xd6, 0x7c, 0xc4, 0x52, 0x4d, 0x47, 0x63,
+	0x6b, 0x1c, 0x7c, 0x03, 0x1b, 0x2f, 0x73, 0xf3, 0x90, 0xbd, 0x9d, 0xb0, 0x54, 0x93, 0x87, 0x00,
+	0x2f, 0x99, 0x8a, 0x2e, 0xa8, 0xd0, 0x47, 0x87, 0xbd, 0xd6, 0x6e, 0x6b, 0xaf, 0x13, 0x7a, 0x12,
+	0xb2, 0x05, 0x4b, 0x27, 0x8c, 0xaa, 0xe8, 0xa2, 0xd7, 0xde, 0x6d, 0xed, 0x2d, 0x84, 0x6e, 0x14,
+	0xbc, 0x80, 0x35, 0x7f, 0xb2, 0x71, 0x32, 0x25, 0xbf, 0x80, 0xee, 0x28, 0x77, 0x4c, 0xcd, 0x5c,
+	0xdd, 0xfe, 0xfd, 0x7d, 0x6f, 0xd3, 0xc5, 0xbc, 0x69, 0xe8, 0xdb, 0x06, 0xbf, 0x85, 0xae, 0xa7,
+	0x23, 0x3d, 0x58, 0x7e, 0xc9, 0xd2, 0x94, 0x0e, 0x99, 0xdb, 0x51, 0x36, 0x24, 0x9f, 0xc2, 0x4a,
+	0x66, 0xd8, 0x6b, 0xef, 0x2e, 0xec, 0x75, 0xfb, 0x9b, 0x75, 0x0b, 0x84, 0xb9, 0x55, 0xf0, 0xcf,
+	0x85, 0xc2, 0x85, 0x7c, 0x02, 0xcb, 0x07, 0x71, 0xac, 0x58, 0x9a, 0x6d, 0xef, 0xae, 0xef, 0xed,
+	0x54, 0x61, 0x66, 0x43, 0x76, 0xa1, 0x7b, 0x7c, 0x21, 0x05, 0x7b, 0x35, 0x19, 0x9d, 0x31, 0x65,
+	0x22, 0xd0, 0x09, 0x7d, 0x11, 0xd9, 0x81, 0xce, 0x53, 0x45, 0x45, 0xfc, 0x8a, 0x8e, 0x58, 0x6f,
+	0xc1, 0xe8, 0x0b, 0x01, 0xf9, 0x18, 0xd6, 0xb3, 0xa5, 0x07, 0x54, 0xb3, 0xa1, 0x54, 0xd3, 0xde,
+	0xa2, 0x31, 0xaa, 0xc8, 0xc9, 0x1e, 0xac, 0x65, 0xb2, 0xc3, 0x33, 0x6a, 0xe6, 0xbb, 0x65, 0x4c,
+	0xcb, 0x62, 0xf2, 0x03, 0x58, 0x3d, 0x64, 0x69, 0xa4, 0xf8, 0x58, 0x4b, 0x75, 0xca, 0xbe, 0xd3,
+	0xbd, 0x25, 0x63, 0x58, 0x92, 0x92, 0x7d, 0x20, 0x2f, 0xd8, 0x90, 0x26, 0x03, 0xa9, 0xc6, 0x52,
+	0x51, 0xcd, 0xcc, 0xa4, 0xcb, 0xc6, 0xb6, 0x46, 0x83, 0x51, 0x1f, 0xc8, 0xd1, 0x88, 0x09, 0xdd,
+	0x5b, 0xb1, 0x51, 0x77, 0x43, 0x4c, 0x92, 0x17, 0x32, 0xa2, 0x9a, 0x4b, 0x71, 0x74, 0xd8, 0xeb,
+	0x98, 0x44, 0xf0, 0x24, 0xb8, 0xd2, 0x89, 0x4c, 0xd8, 0xb1, 0x92, 0x63, 0xc5, 0x99, 0x96, 0xca,
+	0xac, 0x04, 0x76, 0xa5, 0xaa, 0x86, 0xf4, 0x61, 0xf3, 0x25, 0xd5, 0xd1, 0xc5, 0x40, 0x8a, 0x73,
+	0x1e, 0x33, 0x11, 0xb1, 0x93, 0x48, 0x2a, 0xd6, 0xeb, 0x9a, 0x99, 0x6b, 0x75, 0xc1, 0x97, 0x40,
+	0x06, 0x72, 0x22, 0xb4, 0x9a, 0x9e, 0x4c, 0xce, 0x62, 0x7e, 0xc9, 0x53, 0x2e, 0x05, 0x21, 0xb0,
+	0x68, 0xd6, 0xb2, 0x69, 0x62, 0x7e, 0xa3, 0x6c, 0x20, 0x63, 0xe6, 0x8e, 0xcb, 0xfc, 0x0e, 0x3e,
+	0xc3, 0x6f, 0x33, 0xde, 0xd7, 0x76, 0xf9, 0x5b, 0x2b, 0x4f, 0x16, 0xb2, 0x09, 0xb7, 0x12, 0x2e,
+	0xd8, 0x67, 0xce, 0xc9, 0x0e, 0x32, 0x69, 0xdf, 0xb9, 0xd9, 0x01, 0xce, 0x15, 0x71, 0x3d, 0x75,
+	0xd9, 0x60, 0x7e, 0x63, 0x80, 0xa2, 0xca, 0xe6, 0x5d, 0x2a, 0xd4, 0x68, 0x30, 0xe0, 0x63, 0x99,
+	0x6a, 0x3c, 0xa1, 0x38, 0xcb, 0x03, 0x4f, 0x82, 0x47, 0xe5, 0xbc, 0xdc, 0xd9, 0x67, 0xc3, 0x80,
+	0xc3, 0xda, 0xa9, 0x7c, 0xc3, 0xc4, 0x40, 0x4d, 0xc7, 0x5a, 0x0e, 0x15, 0x1d, 0xe1, 0x86, 0xf4,
+	0x74, 0x9c, 0x7f, 0x30, 0xfe, 0xc6, 0xad, 0x5f, 0xd2, 0x64, 0x92, 0x7d, 0xb1, 0x1d, 0x90, 0x9f,
+	0xc0, 0xc6, 0x98, 0x8a, 0x13, 0x84, 0x06, 0x11, 0x65, 0x59, 0x6f, 0xbf, 0xa3, 0xaa, 0x08, 0xfe,
+	0xd1, 0x82, 0xff, 0x2f, 0x30, 0x60, 0x30, 0x51, 0x8a, 0x89, 0x68, 0x3a, 0x90, 0xe2, 0x92, 0x29,
+	0xfc, 0x8a, 0x0c, 0x62, 0xb6, 0x60, 0xe9, 0xfc, 0xbb, 0x43, 0xaa, 0xb3, 0x1d, 0xb8, 0x11, 0xd6,
+	0x8e, 0x56, 0x54, 0xa4, 0xe8, 0xe9, 0xf6, 0x51, 0x08, 0x30, 0xcb, 0x23, 0x15, 0x5f, 0x24, 0xf1,
+	0x53, 0x9e, 0x24, 0xc6, 0xc4, 0x6e, 0xa4, 0x24, 0xc5, 0x50, 0x9c, 0x51, 0xf1, 0xe6, 0x39, 0x63,
+	0x26, 0x9e, 0x0b, 0x61, 0x36, 0x24, 0xdb, 0xb0, 0x62, 0xa6, 0x3b, 0x18, 0x69, 0x13, 0xc2, 0x76,
+	0x98, 0x8f, 0x83, 0xdf, 0xc1, 0x47, 0xf3, 0xb7, 0x8e, 0x80, 0xf6, 0x05, 0xac, 0x28, 0x96, 0x8e,
+	0xa5, 0x48, 0x99, 0x83, 0x8b, 0x1d, 0x1f, 0x2e, 0x32, 0xb7, 0xd0, 0xd9, 0x84, 0xb9, 0x75, 0xf0,
+	0xaf, 0x16, 0xac, 0x97, 0xd5, 0x78, 0x0e, 0xc2, 0x4b, 0x3c, 0xe1, 0x12, 0xcf, 0x9c, 0x4d, 0xdb,
+	0x3b, 0x9b, 0x5d, 0xe8, 0xc6, 0xae, 0x92, 0x31, 0x4b, 0xec, 0x67, 0xfb, 0x22, 0xb2, 0x0f, 0x8b,
+	0x31, 0xc6, 0x73, 0xd1, 0x6c, 0x6a, 0x7b, 0xdf, 0x22, 0xff, 0x7e, 0x86, 0xfc, 0xfb, 0xa7, 0x19,
+	0xf2, 0x87, 0xc6, 0x6e, 0x5e, 0x24, 0xc8, 0x13, 0x33, 0x17, 0x35, 0x79, 0xd4, 0xed, 0xef, 0xd6,
+	0x7d, 0xe0, 0x21, 0xd5, 0x34, 0xff, 0x48, 0x63, 0x1d, 0x7c, 0xdf, 0x86, 0xcd, 0x3a, 0xb5, 0x39,
+	0xb6, 0x22, 0x8c, 0xd9, 0xa1, 0xb7, 0xc3, 0x92, 0x94, 0x3c, 0x82, 0x3b, 0xc5, 0x41, 0xe2, 0xbe,
+	0xda, 0xc6, 0x6c, 0x56, 0x38, 0xb3, 0xf1, 0x85, 0xd2, 0xc6, 0x8b, 0xb4, 0x5a, 0x6c, 0x4e, 0xab,
+	0x5b, 0x57, 0xa7, 0xd5, 0xd2, 0x55, 0x69, 0xb5, 0x6c, 0x16, 0xce, 0xd3, 0x6a, 0x07, 0x3a, 0x4c,
+	0x29, 0xa9, 0x4c, 0x69, 0xae, 0x98, 0x94, 0x2b, 0x04, 0x24, 0x80, 0xdb, 0x66, 0x90, 0xf5, 0xaf,
+	0x8e, 0x99, 0x7d, 0x46, 0x16, 0xfc, 0xbd, 0x8d, 0x4d, 0x55, 0xc4, 0xb6, 0x7f, 0x9c, 0x73, 0x95,
+	0x6a, 0x0f, 0x91, 0x0a, 0x01, 0xc2, 0xc0, 0x88, 0xc7, 0x71, 0x62, 0x91, 0xdb, 0xe6, 0x88, 0x27,
+	0xc1, 0xf0, 0x24, 0xd4, 0x39, 0xdb, 0x34, 0xc9, 0xc7, 0xd8, 0xea, 0xa8, 0x6b, 0x75, 0x8b, 0x73,
+	0x5a, 0x1d, 0x2d, 0x10, 0x6e, 0x8c, 0x7d, 0xcd, 0x45, 0xcc, 0x0e, 0x50, 0xca, 0x46, 0x94, 0x27,
+	0x2e, 0x48, 0x76, 0x40, 0x3e, 0x85, 0xbb, 0x74, 0xa2, 0x2f, 0x98, 0xd0, 0xdc, 0xb6, 0x80, 0xdf,
+	0x18, 0x28, 0xb1, 0x9d, 0xa5, 0x4e, 0x45, 0x9e, 0xc1, 0x9a, 0x9e, 0x45, 0x25, 0x13, 0xb9, 0x6e,
+	0xff, 0x81, 0xbf, 0xa9, 0x12, 0x70, 0x85, 0x65, 0x9f, 0xe0, 0xfb, 0x95, 0xa2, 0xa1, 0x9e, 0xe2,
+	0x91, 0x9e, 0x33, 0x85, 0xa0, 0xa5, 0xdd, 0xef, 0x90, 0x9d, 0x33, 0x4c, 0xc9, 0x2c, 0x94, 0x55,
+	0x05, 0x16, 0xd7, 0x98, 0x4e, 0xb1, 0xab, 0x9d, 0x16, 0x75, 0xe7, 0x8b, 0xc8, 0x97, 0xf0, 0x81,
+	0x1b, 0x7e, 0xab, 0xf8, 0x90, 0x0b, 0xf3, 0x19, 0xae, 0x79, 0xb8, 0x28, 0x37, 0x1b, 0x90, 0x5f,
+	0x42, 0xcf, 0x2c, 0x4a, 0x23, 0x94, 0x62, 0x8f, 0x4c, 0x30, 0x2b, 0xb1, 0x22, 0x5d, 0x9e, 0x36,
+	0xea, 0xc9, 0x53, 0x58, 0xcd, 0x36, 0x7c, 0x30, 0xc2, 0xf9, 0xcc, 0x61, 0x60, 0x81, 0xfb, 0x41,
+	0x9a, 0xb1, 0x08, 0x4b, 0x1e, 0x48, 0x39, 0x52, 0x93, 0x5a, 0x07, 0x91, 0x69, 0x09, 0xbf, 0x56,
+	0xdc, 0x1d, 0x5e, 0x45, 0x4e, 0x3e, 0x86, 0x25, 0x2b, 0x33, 0x47, 0xd7, 0xed, 0x13, 0x7f, 0x1d,
+	0x9b, 0xa0, 0xa1, 0xb3, 0xc0, 0x33, 0x57, 0x2c, 0xe2, 0x63, 0xce, 0x84, 0xf6, 0xa6, 0xb6, 0x44,
+	0xa1, 0x4e, 0x45, 0x3e, 0x87, 0x4e, 0x2e, 0x36, 0x65, 0xd0, 0xed, 0xdf, 0xf3, 0x17, 0x08, 0x33,
+	0x65, 0x58, 0xd8, 0x91, 0x57, 0x40, 0x14, 0x8b, 0xa4, 0x88, 0x78, 0xc2, 0x4d, 0x5c, 0x11, 0x5c,
+	0x0c, 0x93, 0xe8, 0xf6, 0x1f, 0x96, 0xbc, 0x4b, 0x56, 0x61, 0x8d, 0x27, 0x32, 0x8d, 0xc2, 0xe9,
+	0x20, 0x4d, 0xf9, 0x50, 0xb0, 0xf8, 0x28, 0x36, 0x4c, 0xa3, 0x13, 0xd6, 0xea, 0xd0, 0x47, 0xc9,
+	0x89, 0xe6, 0x62, 0x68, 0x62, 0xcd, 0xb5, 0x6b, 0x84, 0xb7, 0xad, 0x4f, 0x9d, 0xce, 0xa4, 0x95,
+	0x92, 0x11, 0x4b, 0x53, 0xa9, 0x8e, 0xe2, 0xde, 0x1d, 0x97, 0x56, 0x85, 0x08, 0xd3, 0x94, 0xc6,
+	0x31, 0xc7, 0x9d, 0xd1, 0x24, 0x43, 0x87, 0x55, 0x9b, 0xa6, 0x15, 0x05, 0xb2, 0xc1, 0x31, 0x55,
+	0x9a, 0x47, 0x7c, 0x6c, 0x49, 0x56, 0xdc, 0x5b, 0xb3, 0x6c, 0xb0, 0x24, 0xc6, 0x79, 0x0d, 0xb4,
+	0x0a, 0x8e, 0xf9, 0xed, 0xf2, 0x66, 0xdd, 0xce, 0x5b, 0x51, 0xe0, 0xb7, 0x79, 0xc2, 0x23, 0x11,
+	0x63, 0x99, 0x4a, 0xd5, 0xdb, 0xb0, 0xdf, 0x56, 0xa7, 0xc3, 0x82, 0xe0, 0x42, 0xdb, 0xb2, 0x1b,
+	0x32, 0x44, 0xef, 0x43, 0x86, 0xc1, 0x32, 0x8e, 0xc4, 0x16, 0x44, 0xa3, 0x01, 0xc2, 0xf4, 0x5b,
+	0x65, 0x4e, 0xf1, 0xae, 0x85, 0x69, 0x3b, 0x22, 0x4f, 0xe0, 0xde, 0x44, 0xf0, 0xb7, 0x13, 0x96,
+	0xd7, 0xa6, 0x0b, 0xf3, 0xa6, 0x31, 0xab, 0x57, 0xe2, 0x1d, 0x23, 0x0f, 0x80, 0xd0, 0xbd, 0x7b,
+	0xd5, 0x3b, 0xc6, 0x71, 0xa1, 0x0e, 0x7d, 0xdb, 0xe0, 0xdf, 0x6d, 0xe8, 0xe4, 0x39, 0xf7, 0x3f,
+	0xe0, 0x7d, 0x1f, 0xe0, 0x35, 0x65, 0x54, 0xba, 0xb0, 0x98, 0xf6, 0xd7, 0x71, 0x65, 0x54, 0xa3,
+	0x0b, 0x9e, 0xc2, 0xea, 0x2c, 0x56, 0x15, 0xa4, 0xb3, 0xe5, 0x93, 0xce, 0x6d, 0x58, 0x89, 0x1c,
+	0x93, 0x70, 0x91, 0xce, 0xc7, 0xc1, 0x33, 0xd8, 0x38, 0x2d, 0xd0, 0xf2, 0xc6, 0xd3, 0x50, 0xe8,
+	0x7a, 0x69, 0x61, 0x38, 0x00, 0x96, 0x7c, 0x14, 0x31, 0xbc, 0x2c, 0x1d, 0xc5, 0x6e, 0xa6, 0x92,
+	0x14, 0xb1, 0xd4, 0x97, 0x78, 0xb9, 0x50, 0x91, 0x07, 0x3f, 0x87, 0xee, 0x60, 0x92, 0x6a, 0x39,
+	0x7a, 0xce, 0x59, 0x12, 0xd7, 0x72, 0xbd, 0x5a, 0xce, 0x1d, 0x7c, 0x0b, 0xa4, 0x8a, 0x65, 0x98,
+	0xe7, 0x51, 0x31, 0x5d, 0xaf, 0x65, 0xae, 0xba, 0xf7, 0x67, 0xc9, 0x59, 0xae, 0x0e, 0x7d, 0xdb,
+	0xe0, 0xaf, 0x2d, 0xd8, 0x2b, 0x37, 0xc9, 0xe7, 0x13, 0x11, 0x73, 0x31, 0x3c, 0x10, 0xf1, 0xb1,
+	0xed, 0x5c, 0x19, 0x37, 0xdf, 0x81, 0x0e, 0xd6, 0x88, 0x60, 0x45, 0x14, 0x0a, 0x01, 0xf9, 0x1a,
+	0xd6, 0x47, 0xa5, 0x99, 0xcc, 0xe6, 0x4b, 0x44, 0xb8, 0xbc, 0x5a, 0x58, 0xf1, 0x0a, 0xfe, 0x00,
+	0x3f, 0xba, 0xc6, 0x9e, 0x1c, 0x87, 0x3c, 0xae, 0x59, 0xd6, 0xf2, 0xef, 0x47, 0x73, 0x97, 0xcd,
+	0x28, 0x6a, 0x75, 0xf9, 0x3f, 0x03, 0xf4, 0x9a, 0xcc, 0xc9, 0x2a, 0xb4, 0x79, 0xf6, 0xf1, 0x6d,
+	0x1e, 0x23, 0x85, 0x53, 0x2c, 0x95, 0x13, 0x15, 0x31, 0x8f, 0x23, 0xcc, 0xc8, 0xea, 0x49, 0xc7,
+	0x42, 0x13, 0xe9, 0x08, 0xe0, 0xb6, 0xc7, 0x30, 0xce, 0x7a, 0xdb, 0x76, 0x46, 0x5f, 0x56, 0xdb,
+	0xb8, 0x17, 0x1b, 0x1a, 0xf7, 0x21, 0x7c, 0x18, 0xf3, 0x21, 0xd7, 0x34, 0x71, 0xc2, 0x32, 0x86,
+	0x5a, 0x2c, 0x99, 0x6f, 0xe4, 0xb5, 0xff, 0xa5, 0x9b, 0xb6, 0xff, 0xe5, 0x6b, 0xb6, 0xff, 0x95,
+	0x6b, 0xb6, 0xff, 0x2a, 0x03, 0xea, 0xbc, 0x37, 0x03, 0xc2, 0xbb, 0xb1, 0x62, 0x54, 0xb3, 0xd8,
+	0xbd, 0x40, 0x64, 0x43, 0x24, 0x17, 0x1e, 0xf7, 0xfa, 0x9a, 0xa7, 0x5a, 0xaa, 0xa9, 0xa1, 0x02,
+	0x25, 0x72, 0x71, 0x5a, 0xb1, 0x0a, 0x6b, 0x3c, 0x1b, 0xc8, 0xca, 0x07, 0x37, 0x26, 0x2b, 0xbf,
+	0x82, 0x07, 0x2e, 0x25, 0x5e, 0xcb, 0x82, 0x59, 0xbe, 0xce, 0x6e, 0xfa, 0xb7, 0xaf, 0xe2, 0x9e,
+	0x3f, 0x84, 0x35, 0xe7, 0x97, 0xbc, 0x4e, 0x35, 0xd5, 0x93, 0xd4, 0x11, 0x91, 0xd5, 0x4c, 0x7c,
+	0x62, 0xa4, 0xd8, 0x93, 0x9d, 0xde, 0x12, 0x10, 0x37, 0x42, 0xd6, 0x61, 0x7f, 0xe5, 0x17, 0xc8,
+	0x8c, 0x75, 0x94, 0xc4, 0x73, 0x69, 0xee, 0xfa, 0x15, 0x34, 0xb7, 0x89, 0x93, 0x6d, 0xcc, 0xe1,
+	0x64, 0x8f, 0xe0, 0xce, 0xb9, 0xc5, 0x8b, 0x13, 0x53, 0x84, 0x8e, 0x77, 0xcc, 0x0a, 0x1b, 0x99,
+	0xdb, 0xdd, 0xeb, 0x33, 0xb7, 0xcd, 0x2a, 0x73, 0xbb, 0x39, 0xe7, 0xa8, 0x27, 0x7d, 0x5b, 0xef,
+	0x41, 0xfa, 0xee, 0xd7, 0x93, 0xbe, 0xb9, 0x94, 0xac, 0x77, 0x05, 0x25, 0x0b, 0xfe, 0xd4, 0x02,
+	0x52, 0x4d, 0xf1, 0x0a, 0xee, 0xb5, 0x6a, 0x70, 0x6f, 0x07, 0x3a, 0x5c, 0xb3, 0x91, 0xc9, 0xb8,
+	0xec, 0xcd, 0x26, 0x17, 0x90, 0x1f, 0xbb, 0xb7, 0x84, 0x85, 0x6a, 0xbb, 0xf2, 0xd6, 0x73, 0x4f,
+	0x08, 0x7f, 0x5c, 0x86, 0xae, 0x27, 0xbd, 0x11, 0x0c, 0x3f, 0x04, 0xa0, 0x05, 0x1a, 0x59, 0xfc,
+	0xf5, 0x24, 0xe4, 0x1b, 0x07, 0xd3, 0x3e, 0x7f, 0x70, 0xac, 0xec, 0xc3, 0x86, 0xdd, 0x39, 0x54,
+	0xa9, 0xfa, 0x21, 0xb0, 0x08, 0xa6, 0xdf, 0x49, 0xf5, 0xc6, 0xe1, 0x6b, 0x36, 0xc4, 0x63, 0x76,
+	0x3f, 0x6d, 0x81, 0x19, 0x6e, 0x64, 0x99, 0x5b, 0x55, 0x81, 0xb5, 0x33, 0x23, 0x3c, 0xf4, 0x1e,
+	0x7b, 0x2c, 0xa0, 0x36, 0xea, 0x71, 0x25, 0x4c, 0xf9, 0xf4, 0xe0, 0x92, 0xf2, 0x84, 0x9e, 0xf1,
+	0x84, 0xeb, 0xa9, 0xbb, 0x84, 0x55, 0x15, 0xf9, 0xeb, 0x52, 0xc7, 0x7b, 0x5d, 0xda, 0x83, 0x35,
+	0x8b, 0x87, 0x45, 0x8d, 0x5b, 0x98, 0x2c, 0x8b, 0x3d, 0x94, 0xe8, 0xce, 0xa0, 0x44, 0x00, 0xb7,
+	0xed, 0xaf, 0x90, 0xd1, 0x54, 0x0a, 0x87, 0x4b, 0x33, 0xb2, 0x3a, 0x24, 0xb9, 0x53, 0x8f, 0x24,
+	0xfb, 0x08, 0xa2, 0x5a, 0x71, 0x76, 0x49, 0x93, 0xa2, 0x95, 0x5a, 0x5c, 0xaa, 0xd1, 0x90, 0x9f,
+	0xc1, 0x56, 0x3a, 0x4d, 0x35, 0x1b, 0x9d, 0x2a, 0x1a, 0xb1, 0x83, 0x49, 0x9c, 0x57, 0xb9, 0x85,
+	0xaa, 0x06, 0x2d, 0xae, 0x93, 0xbe, 0xe3, 0x3a, 0xba, 0x38, 0x61, 0x8a, 0xd3, 0xc4, 0xf9, 0x58,
+	0xac, 0xaa, 0xd1, 0x34, 0xdf, 0x4f, 0x36, 0xe6, 0xdd, 0x4f, 0xf6, 0x60, 0x0d, 0x69, 0xb8, 0x54,
+	0xfc, 0xf7, 0x59, 0x09, 0x5b, 0xa4, 0x2a, 0x8b, 0x1b, 0xef, 0x45, 0x4d, 0x37, 0xb4, 0xcd, 0x39,
+	0x37, 0xb4, 0x2f, 0xe0, 0xbe, 0xeb, 0x0a, 0xe5, 0x56, 0x6f, 0xd0, 0xaa, 0x13, 0x36, 0xa9, 0x03,
+	0x0a, 0x77, 0x9e, 0x29, 0x25, 0x0b, 0x32, 0x84, 0x87, 0x6e, 0x11, 0xd6, 0x3d, 0xd6, 0xda, 0x11,
+	0x56, 0x9a, 0x32, 0x47, 0xeb, 0xbd, 0x93, 0x7b, 0x12, 0x2c, 0x8e, 0x91, 0xc3, 0x37, 0x5b, 0x86,
+	0xd9, 0xb0, 0xff, 0x9f, 0xb6, 0xff, 0xbf, 0xd3, 0x09, 0x53, 0x97, 0x3c, 0x62, 0xe4, 0x14, 0xb6,
+	0xbe, 0x62, 0x3a, 0xff, 0xd3, 0x27, 0xc6, 0x8b, 0xcb, 0x39, 0x67, 0x2a, 0x25, 0x33, 0x85, 0x59,
+	0xf9, 0xc3, 0x6a, 0xfb, 0x41, 0x93, 0x7a, 0x9c, 0x4c, 0xc9, 0x3b, 0xb8, 0xf7, 0x15, 0xd3, 0xd5,
+	0xf7, 0x5c, 0xf2, 0xb8, 0xde, 0xab, 0xf1, 0xd1, 0x7a, 0xfb, 0x93, 0xeb, 0x3b, 0xe0, 0xc2, 0x7f,
+	0x69, 0xc1, 0x47, 0x57, 0x12, 0x5c, 0xf2, 0x64, 0x1e, 0x7d, 0x6d, 0xe2, 0xe8, 0xdb, 0x3f, 0x7d,
+	0x4f, 0x2f, 0x7b, 0x92, 0x67, 0x4b, 0xe6, 0x39, 0xf8, 0xf3, 0xff, 0x06, 0x00, 0x00, 0xff, 0xff,
+	0x0c, 0x39, 0xff, 0xc7, 0x3c, 0x1c, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -852,6 +2263,7 @@ const _ = grpc.SupportPackageIsVersion4
 type MastercardServiceClient interface {
 	GetMerchantIdentifiers(ctx context.Context, in *MastercardRequest, opts ...grpc.CallOption) (*MastercardReply, error)
 	GetCurrencyConversion(ctx context.Context, in *MastercardCurrencyConversionRequest, opts ...grpc.CallOption) (*MastercardCurrencyConversionReply, error)
+	MerchantTransferFundingAndPayment(ctx context.Context, in *MerchantTransferFundingAndPaymentRequest, opts ...grpc.CallOption) (*MerchantTransferFundingAndPaymentResponse, error)
 }
 
 type mastercardServiceClient struct {
@@ -880,10 +2292,20 @@ func (c *mastercardServiceClient) GetCurrencyConversion(ctx context.Context, in 
 	return out, nil
 }
 
+func (c *mastercardServiceClient) MerchantTransferFundingAndPayment(ctx context.Context, in *MerchantTransferFundingAndPaymentRequest, opts ...grpc.CallOption) (*MerchantTransferFundingAndPaymentResponse, error) {
+	out := new(MerchantTransferFundingAndPaymentResponse)
+	err := c.cc.Invoke(ctx, "/mastercard.MastercardService/MerchantTransferFundingAndPayment", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MastercardServiceServer is the server API for MastercardService service.
 type MastercardServiceServer interface {
 	GetMerchantIdentifiers(context.Context, *MastercardRequest) (*MastercardReply, error)
 	GetCurrencyConversion(context.Context, *MastercardCurrencyConversionRequest) (*MastercardCurrencyConversionReply, error)
+	MerchantTransferFundingAndPayment(context.Context, *MerchantTransferFundingAndPaymentRequest) (*MerchantTransferFundingAndPaymentResponse, error)
 }
 
 func RegisterMastercardServiceServer(s *grpc.Server, srv MastercardServiceServer) {
@@ -926,6 +2348,24 @@ func _MastercardService_GetCurrencyConversion_Handler(srv interface{}, ctx conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _MastercardService_MerchantTransferFundingAndPayment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MerchantTransferFundingAndPaymentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MastercardServiceServer).MerchantTransferFundingAndPayment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/mastercard.MastercardService/MerchantTransferFundingAndPayment",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MastercardServiceServer).MerchantTransferFundingAndPayment(ctx, req.(*MerchantTransferFundingAndPaymentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _MastercardService_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "mastercard.MastercardService",
 	HandlerType: (*MastercardServiceServer)(nil),
@@ -937,6 +2377,10 @@ var _MastercardService_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetCurrencyConversion",
 			Handler:    _MastercardService_GetCurrencyConversion_Handler,
+		},
+		{
+			MethodName: "MerchantTransferFundingAndPayment",
+			Handler:    _MastercardService_MerchantTransferFundingAndPayment_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
