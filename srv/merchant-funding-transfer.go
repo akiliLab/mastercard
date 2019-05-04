@@ -1,9 +1,13 @@
 package mastercard
 
 import (
-	"encoding/json"
+	"encoding/xml"
+	"errors"
 	"fmt"
+	"io/ioutil"
+	"log"
 	"net/url"
+	"reflect"
 
 	mastercardpb "github.com/akiliLab/mastercard/proto"
 )
@@ -18,12 +22,41 @@ func (c *Client) MerchantTransferFundingAndPayment(request *mastercardpb.Merchan
 		Path:   "/send/v1/partners/" + request.PartnerId + "/merchant/transfer",
 	}
 
-	// params := url.Values{}
+	params := structToMap(request)
 
-	res1B, _ := json.Marshal(request)
+	params.Set("Format", "XML")
 
-	fmt.Println(string(res1B))
-	fmt.Println(urlFull)
+	resp, err := c.oauthClient.Get(c.httpClient, &c.oauthClient.Credentials, urlFull.String(), params)
 
-	return nil, nil
+	if err != nil {
+		log.Println("Error in mastercard merchantPayment: ", err.Error())
+		return nil, err
+	}
+
+	if resp.StatusCode != 200 {
+		log.Println("Error in mastercard merchantPayment: status: ", resp.Status, "code: ", resp.StatusCode)
+		return nil, errors.New("Failed request to mastercard api : " + resp.Status)
+	}
+
+	defer resp.Body.Close()
+
+	merchantPaymentResponse := &mastercardpb.MerchantTransferFundingAndPaymentResponse{}
+	serializedBody, _ := ioutil.ReadAll(resp.Body)
+	err = xml.Unmarshal(serializedBody, merchantPaymentResponse)
+	if err != nil {
+		return nil, errors.New("Error in mastercard merchantPayment: Couldn't parse XML response")
+	}
+	bodyString := string(serializedBody)
+	fmt.Println("Body: ", bodyString)
+	return merchantPaymentResponse, nil
+}
+
+func structToMap(i interface{}) (values url.Values) {
+	values = url.Values{}
+	iVal := reflect.ValueOf(i).Elem()
+	typ := iVal.Type()
+	for i := 0; i < iVal.NumField(); i++ {
+		values.Set(typ.Field(i).Name, fmt.Sprint(iVal.Field(i)))
+	}
+	return
 }
