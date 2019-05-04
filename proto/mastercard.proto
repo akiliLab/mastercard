@@ -40,19 +40,19 @@ message Merchant {
 }
 
 message CountrySubdivision {
-  string Name = 1;
-  string Code = 2;
+  string name = 1;
+  string code = 2;
 }
 
 // Country contains country informations
 message Country {
-  string Name = 1;
-  string Code = 2;
+  string name = 1;
+  string code = 2;
 }
 
 message AdditionalMerchantData {
-  string paymentFacilitatorId = 1;
-  string subMerchantId = 2;
+  string payment_facilitator_id = 1;
+  string sub_merchant_id = 2;
 }
 
 // Address contains the full address of a merchant
@@ -60,15 +60,15 @@ message Address {
   string line1 = 1;
   string line2 = 2;
   string city = 3;
-  string countrySubdivision = 4;
-  string postalCode = 5;
+  string country_subdivision = 4;
+  string postal_code = 5;
   string country = 6;
 }
 
 message TokenCryptogram {
   string type = 1;
   string value = 2;
-  string panSequenceNumber = 3;
+  string pan_sequence_number = 3;
 }
 
 message MastercardCurrencyConversionRequest {
@@ -124,53 +124,53 @@ message CurrencyDataResponse {
 }
 
 message Sender {
-  string firstName = 1;
-  string middleName = 2;
-  string lastName = 3;
+  string first_name = 1;
+  string middle_name = 2;
+  string last_name = 3;
   Address address = 4;
   string phone = 5;
   string email = 6;
-  string authenticationValue = 7;
-  TokenCryptogram tokenCryptogram = 8;
-  AdditionalMerchantData additionalMerchantData = 9;
+  string authentication_value = 7;
+  TokenCryptogram token_cryptogram = 8;
+  AdditionalMerchantData additional_merchant_data = 9;
 }
 
 message MerchantTransfer {
-  string transferReference = 1;
-  string paymentType = 2;
-  string paymentOriginationCountry = 3;
-  string transactionLocalDateTime = 4;
-  TransferAmount transferAmount = 5;
-  string senderAccountUri = 6;
+  string transfer_reference = 1;
+  string payment_type = 2;
+  string payment_origination_country = 3;
+  string transaction_local_date_time = 4;
+  TransferAmount transfer_amount = 5;
+  string sender_account_uri = 6;
   Sender sender = 7;
-  string recipientAccountUri = 8;
+  string recipient_account_uri = 8;
   Recipient recipient = 9;
-  ReconciliationData reconciliationData = 10;
-  string mastercardAssignedId = 11;
-  string routingTransitNumber = 12;
-  string processorId = 13;
-  string additionalMessage = 14;
-  string participationId = 15;
-  string convenienceAmount = 16;
-  string convenienceIndicator = 17;
-  string interchangeRateDesignator = 18;
-  string qrData = 19;
-  string uniqueReferenceNumber = 20;
+  ReconciliationData reconciliation_data = 10;
+  string mastercard_assigned_id = 11;
+  string routing_transit_number = 12;
+  string processor_id = 13;
+  string additional_message = 14;
+  string participation_id = 15;
+  string convenience_amount = 16;
+  string convenience_indicator = 17;
+  string interchange_rate_designator = 18;
+  string qr_data = 19;
+  string unique_reference_number = 20;
   Participant participant = 21;
-  string digitalAccountReferenceNumber = 22;
+  string digital_account_reference_number = 22;
 }
 
 message Recipient {
-  string firstName = 1;
-  string middleName = 2;
-  string lastName = 3;
+  string first_name = 1;
+  string middle_name = 2;
+  string last_name = 3;
   Address address = 4;
   string phone = 5;
   string email = 6;
-  string authenticationValue = 7;
-  TokenCryptogram tokenCryptogram = 8;
-  string merchantCategoryCode = 9;
-  AdditionalMerchantData additionalMerchantData = 10;
+  string authentication_value = 7;
+  TokenCryptogram token_cryptogram = 8;
+  string merchant_category_code = 9;
+  AdditionalMerchantData additional_merchant_data = 10;
 }
 
 message TransferAmount {
@@ -184,8 +184,8 @@ message TransactionAmount {
 }
 
 message Participant {
-  string cardAcceptorId = 1;
-  string cardAcceptorName = 2;
+  string card_acceptor_id = 1;
+  string card_acceptor_name = 2;
 }
 
 message CustomField {
@@ -193,78 +193,78 @@ message CustomField {
   string value = 2;
 }
 
-message ReconciliationData { repeated CustomField customField = 1; }
+message ReconciliationData { repeated CustomField custom_field = 1; }
 
 message MerchantTransferFundingAndPaymentRequest {
   string partnerId = 1;
-  MerchantTransfer merchantTransfer = 2;
+  MerchantTransfer merchant_transfer = 2;
 }
 
 message MerchantTransferFundingAndPaymentResponse {
-  MerchantTransferResponse merchantTransfer = 1;
+  MerchantTransferResponse merchant_transfer = 1;
 }
 
 message MerchantTransferResponse {
   string id = 1;
-  string resourceType = 2;
-  string transferReference = 3;
-  string paymentTypeb = 26;
-  string senderAccountUri = 4;
-  string digitalAccountReferenceNumber = 5;
+  string resource_type = 2;
+  string transfer_reference = 3;
+  string payment_typeb = 26;
+  string sender_account_uri = 4;
+  string digital_account_reference_number = 5;
   Sender sender = 6;
-  string recipientAccountUri = 7;
+  string recipient_account_uri = 7;
   Recipient recipient = 8;
-  TransferAmount transferAmount = 9;
+  TransferAmount transfer_amount = 9;
   string created = 10;
-  TransactionHistory transactionHistory = 11;
-  ReconciliationData reconciliationData = 25;
+  TransactionHistory transaction_history = 11;
+  ReconciliationData reconciliation_data = 25;
   string payment_origination_country = 12;
   string original_status = 13;
   string status = 14;
-  string statusTimestamp = 15;
-  string transactionLocalDateTime = 16;
-  string mastercardAssignedId = 17;
-  string fundingSource = 18;
-  string routingTransitNumber = 19;
-  string processorId = 20;
+  string status_timestamp = 15;
+  string transaction_local_date_time = 16;
+  string mastercard_assigned_id = 17;
+  string funding_source = 18;
+  string routing_transit_number = 19;
+  string processor_id = 20;
   Participant participant = 21;
-  string additionalMessage = 22;
-  string participationId = 23;
-  string interchangeRateDesignator = 24;
+  string additional_message = 22;
+  string participation_id = 23;
+  string interchange_rate_designator = 24;
 }
 
 message TransactionHistory {
-  string resourceType = 1;
-  string itemCount = 2;
+  string resource_type = 1;
+  string item_count = 2;
   repeated Transaction data = 3;
 }
 
 message Transaction {
   string id = 1;
-  string resourceType = 2;
-  string accountUri = 3;
-  TransactionAmount transactionAmount = 4;
+  string resource_type = 2;
+  string account_uri = 3;
+  TransactionAmount transaction_amount = 4;
   string network = 5;
-  string networkStatusCode = 6;
-  string networkStatusDescription = 7;
-  string fundsAvailability = 8;
+  string network_status_code = 6;
+  string network_status_description = 7;
+  string funds_availability = 8;
   string type = 9;
-  string createTimestamp = 10;
+  string create_timestamp = 10;
   string status = 11;
-  string statusReason = 12;
-  string statusTimestamp = 13;
-  string retrievalReference = 14;
-  string systemTraceAuditNumber = 15;
-  string switchSerialNumber = 16;
-  string uniqueReferenceNumber = 17;
-  string authorizationId = 18;
-  string qrData = 19;
-  string convenienceIndicator = 20;
-  string paymentAccountReference = 21;
+  string status_reason = 12;
+  string status_timestamp = 13;
+  string retrieval_reference = 14;
+  string system_trace_audit_number = 15;
+  string switch_serial_number = 16;
+  string unique_reference_number = 17;
+  string authorization_id = 18;
+  string qr_data = 19;
+  string convenience_indicator = 20;
+  string payment_account_reference = 21;
 }
 
 message ErrorResponse {
   string source = 1;
-  string reasonCode = 2;
+  string reason_code = 2;
   string message = 3;
 }
