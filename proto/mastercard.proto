@@ -50,6 +50,11 @@ message Country {
   string Code = 2;
 }
 
+message AdditionalMerchantData {
+  string paymentFacilitatorId = 1;
+  string subMerchantId = 2;
+}
+
 // Address contains the full address of a merchant
 message Address {
   string line1 = 1;
@@ -127,6 +132,7 @@ message Sender {
   string email = 6;
   string authenticationValue = 7;
   TokenCryptogram tokenCryptogram = 8;
+  AdditionalMerchantData additionalMerchantData = 9;
 }
 
 message MerchantTransfer {
@@ -151,6 +157,7 @@ message MerchantTransfer {
   string qrData = 19;
   string uniqueReferenceNumber = 20;
   Participant participant = 21;
+  string digitalAccountReferenceNumber = 22;
 }
 
 message Recipient {
@@ -163,6 +170,7 @@ message Recipient {
   string authenticationValue = 7;
   TokenCryptogram tokenCryptogram = 8;
   string merchantCategoryCode = 9;
+  AdditionalMerchantData additionalMerchantData = 10;
 }
 
 message TransferAmount {
