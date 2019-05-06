@@ -19,14 +19,14 @@ func (c *Client) MerchantTransferFundingAndPayment(request *mastercardpb.Merchan
 	urlFull := &url.URL{
 		Scheme: "https",
 		Host:   c.BaseURL,
-		Path:   "/send/v1/partners/" + request.PartnerId + "/merchant/transfer",
+		Path:   "/send/static/v1/partners/" + request.PartnerId + "/merchant/transfer",
 	}
 
 	params := structToMap(request)
 
-	params.Set("Format", "XML")
+	params.Set("Format", "JSON")
 
-	resp, err := c.oauthClient.Get(c.httpClient, &c.oauthClient.Credentials, urlFull.String(), params)
+	resp, err := c.oauthClient.Post(c.httpClient, &c.oauthClient.Credentials, urlFull.String(), params)
 
 	if err != nil {
 		log.Println("Error in mastercard merchantPayment: ", err.Error())
@@ -34,6 +34,9 @@ func (c *Client) MerchantTransferFundingAndPayment(request *mastercardpb.Merchan
 	}
 
 	if resp.StatusCode != 200 {
+		serializedBody, _ := ioutil.ReadAll(resp.Body)
+		bodyString := string(serializedBody)
+		fmt.Println("Body: ", bodyString)
 		log.Println("Error in mastercard merchantPayment: status: ", resp.Status, "code: ", resp.StatusCode)
 		return nil, errors.New("Failed request to mastercard api : " + resp.Status)
 	}
