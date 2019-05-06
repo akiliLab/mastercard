@@ -1,11 +1,13 @@
 package mastercard
 
 import (
-	"encoding/xml"
+	"bytes"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"io/ioutil"
 	"log"
+	"net/http"
 	"net/url"
 	"reflect"
 
@@ -22,11 +24,24 @@ func (c *Client) MerchantTransferFundingAndPayment(request *mastercardpb.Merchan
 		Path:   "/send/static/v1/partners/" + request.PartnerId + "/merchant/transfer",
 	}
 
-	params := structToMap(request)
+	params := url.Values{}
+	params.Add("Format", "JSON")
 
-	params.Set("Format", "JSON")
+	body, err := json.Marshal(request)
+	if err != nil {
+		return nil, err
+	}
 
-	resp, err := c.oauthClient.Post(c.httpClient, &c.oauthClient.Credentials, urlFull.String(), params)
+	authorization := getAuthorizationHeader(urlFull, params, "POST", body, c.ConsumerKey, c.PrivateKey)
+
+	urlFull.RawQuery = params.Encode()
+
+	req, err := http.NewRequest("POST", urlFull.String(), bytes.NewBuffer(body))
+	req.Header.Set("Authorization", authorization)
+	req.Header.Set("Content-Type", "application/json")
+	req.Header.Set("Accept", "application/json")
+
+	resp, err := c.httpClient.Do(req)
 
 	if err != nil {
 		log.Println("Error in mastercard merchantPayment: ", err.Error())
@@ -44,14 +59,17 @@ func (c *Client) MerchantTransferFundingAndPayment(request *mastercardpb.Merchan
 	defer resp.Body.Close()
 
 	merchantPaymentResponse := &mastercardpb.MerchantTransferFundingAndPaymentResponse{}
+
 	serializedBody, _ := ioutil.ReadAll(resp.Body)
-	err = xml.Unmarshal(serializedBody, merchantPaymentResponse)
+
+	err = json.Unmarshal(serializedBody, merchantPaymentResponse)
+
 	if err != nil {
 		return nil, errors.New("Error in mastercard merchantPayment: Couldn't parse XML response")
 	}
-	bodyString := string(serializedBody)
-	fmt.Println("Body: ", bodyString)
+
 	return merchantPaymentResponse, nil
+
 }
 
 func structToMap(i interface{}) (values url.Values) {

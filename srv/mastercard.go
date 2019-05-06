@@ -28,6 +28,15 @@ type Client struct {
 
 	// User agent used when communicating with the Mastercard API.
 	UserAgent string
+
+	// PrivateKey
+	PrivateKey *rsa.PrivateKey
+
+	// ConsumerKey
+	ConsumerKey string
+
+	// SignatureMethod
+	SignatureMethod string
 }
 
 // EnvType equals the type of environment to work in
@@ -63,10 +72,13 @@ func (e EnvType) BaseURL() string {
 // your RSA private key and sign requests correctly
 func NewClient(consumerKey string, privateKey *rsa.PrivateKey, keystorePassword string, env EnvType) (*Client, error) {
 	client := &Client{
-		httpClient:  http.DefaultClient,
-		BaseURL:     env.BaseURL(),
-		UserAgent:   userAgent,
-		oauthClient: &oauth.Client{},
+		httpClient:      http.DefaultClient,
+		BaseURL:         env.BaseURL(),
+		UserAgent:       userAgent,
+		oauthClient:     &oauth.Client{},
+		PrivateKey:      privateKey,
+		ConsumerKey:     consumerKey,
+		SignatureMethod: "RSA-SHA256",
 	}
 
 	client.oauthClient.PrivateKey = privateKey
