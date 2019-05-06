@@ -9,7 +9,6 @@ import (
 	"log"
 	"net/http"
 	"net/url"
-	"reflect"
 
 	mastercardpb "github.com/akiliLab/mastercard/proto"
 )
@@ -70,14 +69,4 @@ func (c *Client) MerchantTransferFundingAndPayment(request *mastercardpb.Merchan
 
 	return merchantPaymentResponse, nil
 
-}
-
-func structToMap(i interface{}) (values url.Values) {
-	values = url.Values{}
-	iVal := reflect.ValueOf(i).Elem()
-	typ := iVal.Type()
-	for i := 0; i < iVal.NumField(); i++ {
-		values.Set(typ.Field(i).Name, fmt.Sprint(iVal.Field(i)))
-	}
-	return
 }
